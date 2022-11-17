@@ -24,12 +24,12 @@
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
-                <md-input v-model="user.userid" type="email"></md-input>
+                <md-input v-model="user.userinfo_id" type="email"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
                 <label>Password...</label>
-                <md-input v-model="user.userpwd" type="password"></md-input>
+                <md-input v-model="user.userinfo_password" type="password"></md-input>
               </md-field>
               <md-button href="/" slot="footer" class="md-simple md-success md-lg" @click.prevent="confirm">
                 Login
@@ -59,8 +59,8 @@ export default {
   data() {
     return {
       user: {
-        userid: null,
-        userpwd: null,
+        userinfo_id: null,
+        userinfo_password: null,
       },
     };
   },
