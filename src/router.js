@@ -7,9 +7,7 @@ import Profile from "@/views/Profile.vue";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 import Join from "@/views/Join.vue";
-<<<<<<< src/router.js
-import AppNotice from "@/views/AppNotice"
-=======
+
 import Notice from "@/views/AppNotice.vue";
 
 import Qa from "@/views/AppQa.vue";
@@ -18,8 +16,6 @@ import QaWrite from "@/components/qa/QaWrite.vue"
 import QaDelete from "@/components/qa/QaDelete.vue"
 import QaModify from "@/components/qa/QaModify.vue"
 import QaView from "@/components/qa/QaView.vue"
-
->>>>>>> src/router.js
 
 Vue.use(Router);
 
