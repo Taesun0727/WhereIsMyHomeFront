@@ -19,19 +19,19 @@
                             <md-field class="md-form-group" slot="inputs">
                                 <md-icon>face</md-icon>
                                 <label>NickName...</label>
-                                <md-input v-model="nickname"></md-input>
+                                <md-input v-model="user.userinfo_nick"></md-input>
                             </md-field>
                             <md-field class="md-form-group" slot="inputs">
                                 <md-icon>account_circle</md-icon>
                                 <label>ID...</label>
-                                <md-input v-model="id"></md-input>
+                                <md-input v-model="user.userinfo_id"></md-input>
                             </md-field>
                             <md-field class="md-form-group" slot="inputs">
                                 <md-icon>lock_outline</md-icon>
                                 <label>Password...</label>
-                                <md-input v-model="password" type="password"></md-input>
+                                <md-input v-model="user.userinfo_password" type="password"></md-input>
                             </md-field>
-                            <md-button href="#/Login" slot="footer" class="md-simple md-success md-lg">
+                            <md-button href="#/Login" slot="footer" class="md-simple md-success md-lg" @click="join">
                                 회원가입
                             </md-button>
                         </login-card>
@@ -44,6 +44,7 @@
 
 <script>
 import { LoginCard } from "@/components";
+import axios from "@/api/http";
 
 export default {
     components: {
@@ -52,9 +53,12 @@ export default {
     bodyClass: "login-page",
     data() {
         return {
-            nickname: null,
-            id: null,
-            password: null,
+            user:{
+                userinfo_nick: '',
+                userinfo_id: '',
+                userinfo_password: '',
+            }
+            
         };
     },
     props: {
@@ -69,7 +73,17 @@ export default {
                 backgroundImage: `url(${this.header})`
             };
         }
-    }
+    },
+    methods: {
+        join(){
+            axios
+            .post(`/user/join`, this.user)
+            .then(({data}) => {
+                console.log(data);
+            })
+        }
+    },
+
 };
 </script>
 
