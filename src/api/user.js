@@ -20,4 +20,15 @@ async function logout(userid, success, fail) {
   await api.get(`/user/logout/${userid}`).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout };
+async function Delete(userinfo_num, success, fail){
+  await api.delete(`/user/delete/${userinfo_num}`).then(success).catch(fail);
+}
+
+async function Modify(user, success, fail){
+  await api.put(`/user/update`, JSON.stringify(user)).then(success).catch(fail);
+}
+
+async function PwModify(user, success, fail){
+  await api.put(`/user/pwupdate`, JSON.stringify(user)).then(success).catch(fail);
+}
+export { login, findById, tokenRegeneration, logout, Delete, Modify, PwModify};

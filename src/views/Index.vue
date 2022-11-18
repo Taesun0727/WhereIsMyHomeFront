@@ -13,6 +13,11 @@
       </div>
     </parallax>
     <div class="main main-raised">
+      <!-- <div class="section section-white"> -->
+        <div class="container">
+          <nav-pills></nav-pills>
+        <!-- </div> -->
+      </div>
       <div class="section section-basic">
         <div class="container">
           <div class="title">
@@ -30,11 +35,6 @@
       <div class="section section-tabs">
         <div class="container">
           <tabs></tabs>
-        </div>
-      </div>
-      <div class="section section-white">
-        <div class="container">
-          <nav-pills></nav-pills>
         </div>
       </div>
       <div class="section section-notifications">

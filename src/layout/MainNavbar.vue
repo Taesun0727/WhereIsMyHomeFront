@@ -129,17 +129,20 @@
                 <p class="hidden-lg">Facebook</p>
                 <md-tooltip md-direction="bottom">Like us on Facebook</md-tooltip>
               </md-list-item>
-              <md-list-item @click.prevent="onClickLogout" v-if="isLogin">
-                <i class="material-icons">logout</i>
-                <p class="hidden-lg">Logout</p>
-                <md-tooltip md-direction="bottom">move to logout</md-tooltip>
-              </md-list-item>
 
-              <md-list-item :to="{ name: 'mypage' }" v-if="userInfo">
-                <i class="material-icons">account_circle</i>
-                <p class="hidden-lg">MyPage</p>
-                <md-tooltip md-direction="bottom">move to MyPage</md-tooltip>
-              </md-list-item>
+              <md-list v-if="isLogin">
+                <md-list-item @click.prevent="onClickLogout" >
+                  <i class="material-icons">logout</i>
+                  <p class="hidden-lg">Logout</p>
+                  <md-tooltip md-direction="bottom">move to logout</md-tooltip>
+                </md-list-item>
+
+                <md-list-item :to="{name: 'mypage'}">
+                  <i class="material-icons">account_circle</i>
+                  <p class="hidden-lg">MyPage</p>
+                  <md-tooltip md-direction="bottom">move to MyPage</md-tooltip>
+                </md-list-item>
+              </md-list>
 
               <md-list-item :to="{ name: 'login' }" v-else>
                 <i class="material-icons">login_variant</i>
@@ -200,7 +203,7 @@ export default {
     ...mapState(userStore, ["isLogin", "userInfo"]),
     ...mapGetters(["checkUserInfo"]),
     showDownload() {
-      const excludedRoutes = ["login", "landing", "profile", "notice", "qa"];
+      const excludedRoutes = ["login", "landing", "profile", "notice", "qa", "mypage"];
       return excludedRoutes.every((r) => r !== this.$route.name);
     },
   },

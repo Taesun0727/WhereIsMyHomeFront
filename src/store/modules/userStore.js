@@ -1,6 +1,6 @@
 import router from "@/router.js";
 import jwtDecode from "jwt-decode";
-import { login, findById, tokenRegeneration, logout } from "@/api/user";
+import { login, findById, tokenRegeneration, logout, Delete, Modify, PwModify} from "@/api/user";
 
 const userStore = {
   namespaced: true,
@@ -140,7 +140,53 @@ const userStore = {
         }
       );
     },
-  },
+    async userDelete({commit}, userinfo){
+      await Delete(userinfo,
+        ({data}) => {
+          if(data === "success"){
+            commit("SET_IS_LOGIN", false);
+            commit("SET_USER_INFO", null);
+            commit("SET_IS_VALID_TOKEN", false);
+          } else {
+            
+            console.log("탈퇴가 제대로 이루어지지 않음!!!");
+          }
+        },
+        (error) => {
+          console.log(error);
+        } 
+      );
+    },
+    async userModify({commit}, userinfo){
+      await Modify(userinfo, 
+        ({data}) => {
+          if(data === "success"){
+            commit("SET_IS_LOGIN", true);
+            commit("SET_IS_LOGIN_ERROR", false);
+            commit("SET_IS_VALID_TOKEN", true);
+            console.log("수정 성공!!!!");
+          }
+          else {
+            console.log("수정 실패!!!");
+          }
+        }
+      );
+    },
+    async userPwModify({commit}, userinfo){
+      await PwModify(userinfo, 
+        ({data}) => {
+          if(data === "success"){
+            commit("SET_IS_LOGIN", true);
+            commit("SET_IS_LOGIN_ERROR", false);
+            commit("SET_IS_VALID_TOKEN", true);
+            alert("패스워드 수정 성공!!!");
+          } else{
+            alert("패스워드 수정 실패!!!!");
+          }
+        }
+      );
+    },
+  }
 };
 
 export default userStore;
