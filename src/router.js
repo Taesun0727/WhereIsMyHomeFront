@@ -7,6 +7,7 @@ import Profile from "@/views/Profile.vue";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 import Join from "@/views/Join.vue";
+import MyPage from "@/views/MyPage.vue";
 
 import Notice from "@/views/AppNotice.vue";
 import NoticeList from "@/components/notice/NoticeList.vue"
@@ -56,6 +57,14 @@ export default new Router({
       path: "/join",
       name: "join",
       components: { default: Join, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 }
+      }
+    },
+    {
+      path: "/mypage",
+      name: "mypage",
+      components: { default: MyPage, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 }
       }

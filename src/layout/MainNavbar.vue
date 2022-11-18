@@ -131,6 +131,13 @@
                 <p class="hidden-lg">Logout</p>
                 <md-tooltip md-direction="bottom">move to logout</md-tooltip>
               </md-list-item>
+
+              <md-list-item :to="{name: 'mypage'}" v-if="userInfo">
+                <i class="material-icons">account_circle</i>
+                <p class="hidden-lg">MyPage</p>
+                <md-tooltip md-direction="bottom">move to MyPage</md-tooltip>
+              </md-list-item>
+
               <md-list-item :to="{ name: 'login' }" v-else>
                 <i class="material-icons">login_variant</i>
                 <p class="hidden-lg">Login</p>
