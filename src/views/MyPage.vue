@@ -4,51 +4,48 @@
       <div class="container">
         <div class="md-layout">
           <div class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto">
-            <login-card header-color="red">
+            <login-card header-color="red" v-if="userInfo" style="width:600px;">
               <h4 slot="title" class="card-title">My Page</h4>
-              <!-- <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
-                <i class="fab fa-facebook-square"></i>
-              </md-button>
-              <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
-                <i class="fab fa-twitter"></i>
-              </md-button>
-              <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
-                <i class="fab fa-google-plus-g"></i>
-              </md-button> -->
               <p slot="description" class="description">User</p>
 
-              <!-- <md-field class="md-form-group" slot="inputs">
-                <md-icon>face</md-icon>
-                <md-label>{{user.userinfo_id}}</md-label>
-                <md-input v-model="firstname"></md-input>
-              </md-field> -->
+              <span slot="description" class="nickname">
+                  <div style="display:flex; align-items:center;">
+                    <h5>Nickname :</h5>
+                    <h5 v-if="!isModify">{{userInfo.userinfo_nick}}</h5>
+                    <md-field md-inline v-else>
+                      <label>nickname</label>
+                      <md-input style="d-inline" v-model="userInfo.userinfo_nick"></md-input>
+                      <md-button style="d-inline" @click="Modify">수정하기</md-button>
+                    </md-field>
+                  </div>
+              </span>
 
-              <!-- <div>
-                <md-icon>face</md-icon>
-                <md-label>Email...</md-label>
-              </div> -->
+              <span slot="description" class="id" v-if="!isPwModify">
+                <div style="display:flex; align-items:center;">
+                  <h4>ID : {{userInfo.userinfo_id}}</h4>
+                </div>
+              </span>
 
-              <!-- <md-field class="md-form-group" slot="inputs">
-                  <md-icon>face</md-icon>
-                  <md-label>{{user.userinfo_id}}</md-label>
-                  <md-input v-model="firstname"></md-input>
-              </md-field> -->
+              
+              <span slot="description" class="id" v-else>
+                <div style="display:flex; align-items:center;">
+                  <h5>PW : </h5>
+                  <md-field>
+                    <md-input style="d-inline" v-model="userInfo.userinfo_password" type="password"></md-input>
+                  </md-field>
+                  <md-button style="d-inline" @click="PwModify">수정하기</md-button>
+                </div>
+              </span>
 
-              <md-field class="md-form-group" slot="inputs">
-                <md-icon>email</md-icon>
-                <label>Email...</label>
-                <md-input v-model="user.userinfo_id" type="email"></md-input>
-              </md-field>
-              <md-field class="md-form-group" slot="inputs">
-                <md-icon>lock_outline</md-icon>
-                <label>Password...</label>
-                <md-input v-model="user.userinfo_password" type="password"></md-input>
-              </md-field>
-              <md-button href="/" slot="footer" class="md-simple md-success md-lg" @click.prevent="confirm">
-                Login
+              <md-button slot="footer" class="md-simple md-success md-lg" @click="isModify = !isModify">
+                UserModify
               </md-button>
-              <md-button href="#/Join" slot="footer" class="md-simple md-success md-lg">
-                Sign Up
+              <md-button href="/" slot="footer" class="md-simple md-success md-lg" @click="Delete">
+                UserDelete
+              </md-button>
+
+              <md-button slot="footer" class="md-simple md-success md-lg" @click="isPwModify = !isPwModify">
+                PasswordUpdate
               </md-button>
             </login-card>
           </div>
@@ -67,13 +64,18 @@ const userStore = "userStore";
 export default {
   components: {
       LoginCard,
-    },
+  },
+  name: "MyPage",
   bodyClass: "login-page",
   data() {
     return {
+      isModify: false,
+      isPwModify: false,
       user: {
-        userinfo_id: null,
+        userinfo_nick: null,
         userinfo_password: null,
+        userinfo_id: null,
+        userinfo_num: null,
       },
     };
   },
@@ -84,7 +86,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"]),
+    ...mapState(userStore, ["userInfo", "isLoginError", "isLogin", "isValidToken"]),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`,
@@ -92,16 +94,22 @@ export default {
     },
   },
   methods: {
-    ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
-    async confirm() {
-      await this.userConfirm(this.user);
-      let token = sessionStorage.getItem("access-token");
-      // console.log("1. confirm() token >> " + token);
-      if (this.isLogin) {
-        await this.getUserInfo(token);
-        // console.log("4. confirm() userInfo :: ", this.userInfo);
-        this.$router.push({ name: "index" });
+    ...mapActions(userStore, ["userConfirm", "getUserInfo", "userDelete", "userModify", "userPwModify"]),
+    async Delete(){
+      await this.userDelete(this.userInfo.userinfo_num);
+
+      if(this.userInfo){
+        this.$router.push({name: "index"});
       }
+    },
+    async Modify(){
+      console.log(this.userInfo);
+      await this.userModify(this.userInfo);
+      this.isModify = false;
+    },
+    async PwModify(){
+      await this.userPwModify(this.userInfo);
+      this.isPwModify = false;
     },
   },
 }
