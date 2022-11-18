@@ -66,7 +66,7 @@
                 <p>notice</p>
               </md-list-item>
 
-              <md-list-item :to="{ name: 'qa' }">
+              <md-list-item :to="{ name: 'qa' }" class="md-e-5">
                 <i class="material-icons">content_paste</i>
                 <p>Q & A</p>
               </md-list-item>
@@ -126,7 +126,7 @@
                 <p class="hidden-lg">Facebook</p>
                 <md-tooltip md-direction="bottom">Like us on Facebook</md-tooltip>
               </md-list-item>
-              <md-list-item @click.prevent="onClickLogout" v-if="userInfo">
+              <md-list-item @click.prevent="onClickLogout" v-if="isLogin">
                 <i class="material-icons">logout</i>
                 <p class="hidden-lg">Logout</p>
                 <md-tooltip md-direction="bottom">move to logout</md-tooltip>
