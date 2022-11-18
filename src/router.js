@@ -10,6 +10,11 @@ import Join from "@/views/Join.vue";
 import MyPage from "@/views/MyPage.vue";
 
 import Notice from "@/views/AppNotice.vue";
+import NoticeList from "@/components/notice/NoticeList.vue"
+import NoticeView from "@/components/notice/NoticeView.vue"
+import NoticeWrite from "@/components/notice/NoticeWrite.vue"
+import NoticeDelete from "@/components/notice/NoticeDelete.vue"
+import NoticeModify from "@/components/notice/NoticeModify.vue"
 
 import Qa from "@/views/AppQa.vue";
 import QaList from "@/components/qa/QaList.vue"
@@ -76,8 +81,35 @@ export default new Router({
     {
       path: "/notice",
       name: "notice",
-      components: { default: Notice, header: MainNavbar, footer: MainFooter},
-      // children: []
+      components: { default: Notice, header: MainNavbar, footer: MainFooter },
+      redirect: "/notice/list",
+      children: [
+        {
+          path: "list",
+          name: "noticelist",
+          component: NoticeList
+        },
+        {
+          path: "write",
+          name: "noticewrite",
+          component: NoticeWrite
+        },
+        {
+          path: "delete",
+          name: "noticedelete",
+          component: NoticeDelete
+        },
+        {
+          path: "modify",
+          name: "noticemodify",
+          component: NoticeModify
+        },
+        {
+          path: "view",
+          name: "noticeview",
+          component: NoticeView
+        }
+      ]
     },
     {
       path: "/qa",

@@ -7,7 +7,9 @@ const userStore = {
   state: {
     isLogin: false,
     isLoginError: false,
-    userInfo: null,
+    userInfo: {
+      userinfoLevel: 3
+    },
     isValidToken: false,
   },
   getters: {
@@ -20,7 +22,9 @@ const userStore = {
   },
   mutations: {
     SET_IS_LOGIN: (state, isLogin) => {
+      console.log(isLogin)
       state.isLogin = isLogin;
+      console.log(state.isLogin)
     },
     SET_IS_LOGIN_ERROR: (state, isLoginError) => {
       state.isLoginError = isLoginError;
@@ -124,8 +128,8 @@ const userStore = {
         userinfo,
         ({ data }) => {
           if (data.message === "success") {
+            commit("SET_USER_INFO", {userinfo_level : 3});
             commit("SET_IS_LOGIN", false);
-            commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
           } else {
             console.log("유저 정보 없음!!!!");

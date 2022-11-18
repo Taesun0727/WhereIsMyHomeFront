@@ -1,5 +1,5 @@
 <template>
-  <md-card class="md-primary" md-theme="purple-card" md-with-hover>
+  <md-card>
     <md-ripple>
       <md-card-content>
         <h1 class="title">{{ title }}</h1>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "title",
+  name: "ComponentTitle",
   props: {
     title: String,
   },
