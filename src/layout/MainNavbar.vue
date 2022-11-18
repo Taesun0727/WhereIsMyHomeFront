@@ -8,7 +8,10 @@
   >
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">Vue Material Kit</h3>
+        <md-list-item :to="{ name: 'index' }">
+          <i class="material-icons">home</i>
+          <p>해피하우스</p>
+        </md-list-item>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -132,7 +135,7 @@
                 <md-tooltip md-direction="bottom">move to logout</md-tooltip>
               </md-list-item>
 
-              <md-list-item :to="{name: 'mypage'}" v-if="userInfo">
+              <md-list-item :to="{ name: 'mypage' }" v-if="userInfo">
                 <i class="material-icons">account_circle</i>
                 <p class="hidden-lg">MyPage</p>
                 <md-tooltip md-direction="bottom">move to MyPage</md-tooltip>

@@ -1,16 +1,10 @@
 <template>
   <div>
-    <md-button class="md-primary" style="float: right;" :to="{ name: 'qawrite' }">작성하기</md-button>
+    <md-button class="md-primary" style="float: right;" :to="{ name: 'qawrite' }" v-if="userInfo.userinfo_level === 2"
+      >문의하기</md-button
+    >
     <md-table md-card>
-      <md-table-row>
-        <md-table-head md-numeric>번호</md-table-head>
-        <md-table-head>제목</md-table-head>
-        <md-table-head>날짜</md-table-head>
-        <md-table-head>상태</md-table-head>
-        <md-table-head>비고</md-table-head>
-      </md-table-row>
-
-      <qa-list-item v-for="article in articles" :key="article.qa_num" v-bind="article"></qa-list-item>
+      <qa-list-item v-for="qna in qnas" :key="qna.qa_num" v-bind="qna"></qa-list-item>
     </md-table>
   </div>
 </template>
@@ -18,24 +12,33 @@
 <script>
 import QaListItem from "./QaListItem.vue";
 import axios from "@/api/http.js";
+import { mapActions, mapState } from "vuex";
+const userStore = "userStore";
+const qnaStore = "qnaStore";
+
 export default {
   name: "QaList",
   components: {
     QaListItem,
   },
-  data: () => ({
-    articles: [],
-    paginatedUsers: [],
-  }),
+  data: () => ({}),
   methods: {
+    ...mapActions(qnaStore, ["GetMyQnas", "GetAllQnas"]),
     updatePagination(page, pageSize, sort, sortOrder) {
       console.log("pagination has updated", page, pageSize, sort, sortOrder);
     },
   },
+  computed: {
+    ...mapState(userStore, ["userInfo"]),
+    ...mapState(qnaStore, ["qnas"]),
+  },
   created() {
-    axios.get("/qa").then(({ data }) => {
-      this.articles = data;
-    });
+    if (this.userInfo.userinfo_level == 1) {
+      this.GetAllQnas();
+    } else if (this.userInfo.userinfo_level == 2) {
+      this.GetMyQnas(this.userInfo.userinfo_num);
+    } else {
+    }
   },
 };
 </script>

@@ -1,15 +1,13 @@
 <template>
-  <md-table-row>
-    <md-table-cell md-numeric>{{ qa_num }}</md-table-cell>
-    <md-table-cell
-      ><router-link :to="{ name: 'qaview', params: { articleno: qa_num } }">{{ qa_title }}</router-link></md-table-cell
+  <md-table-row class="md-size-100">
+    <md-table-cell style="width: 10%"
+      ><span class="badge badge-default" v-if="qa_status == 0">답변준비중</span
+      ><span class="badge badge-success" v-else>답변완료</span></md-table-cell
     >
-    <md-table-cell>{{ qa_register_date }}</md-table-cell>
-    <md-table-cell>{{ qa_status | statusFormat }}</md-table-cell>
-    <md-table-cell>
-      <md-button class="md-info" :to="{ name: 'qamodify', params: { articleno: qa_num } }">수정</md-button>
-      <md-button class="md-rose" :to="{ name: 'qadelete', params: { articleno: qa_num } }">삭제</md-button>
-    </md-table-cell>
+    <md-table-cell style="width: 70%"
+      ><router-link :to="{ name: 'qaview', params: { qnaNum: qa_num } }">{{ qa_title }}</router-link></md-table-cell
+    >
+    <md-table-cell class="md-size-30">{{ qa_register_date }}</md-table-cell>
   </md-table-row>
 </template>
 

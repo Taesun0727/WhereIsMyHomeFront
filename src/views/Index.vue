@@ -4,10 +4,6 @@
       <div class="md-layout">
         <div class="md-layout-item">
           <div class="image-wrapper">
-            <img :src="leaf4" alt="leaf4" class="leaf4" v-show="leafShow" />
-            <img :src="leaf3" alt="leaf3" class="leaf3" v-show="leafShow" />
-            <img :src="leaf2" alt="leaf2" class="leaf2" v-show="leafShow" />
-            <img :src="leaf1" alt="leaf1" class="leaf1" v-show="leafShow" />
             <div class="brand">
               <h1>Vue Material Kit</h1>
               <h3>A Badass Vue.js UI Kit made with Material Design.</h3>
@@ -62,15 +58,12 @@
       <div class="section">
         <div class="container text-center">
           <div class="md-layout">
-            <div
-              class="md-layout-item md-size-66 md-xsmall-size-100 ml-auto mr-auto text-center"
-            >
+            <div class="md-layout-item md-size-66 md-xsmall-size-100 ml-auto mr-auto text-center">
               <h2>Completed with examples</h2>
               <h4>
-                The kit comes with three pre-built pages to help you get started
-                faster. You can change the text and images and you're good to
-                go. More importantly, looking at them will give you a picture of
-                what you can built with this powerful kit.
+                The kit comes with three pre-built pages to help you get started faster. You can change the text and
+                images and you're good to go. More importantly, looking at them will give you a picture of what you can
+                built with this powerful kit.
               </h4>
             </div>
           </div>
@@ -84,25 +77,13 @@
             >
               <login-card header-color="green">
                 <h4 slot="title" class="card-title">Login</h4>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
+                <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
                   <i class="fab fa-facebook-square"></i>
                 </md-button>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
+                <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
                   <i class="fab fa-twitter"></i>
                 </md-button>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
+                <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
                   <i class="fab fa-google-plus-g"></i>
                 </md-button>
                 <p slot="description" class="description">Or Be Classical</p>
@@ -131,9 +112,7 @@
       </div>
       <div class="md-layout">
         <div class="md-layout-item text-center">
-          <md-button href="#/login" class="md-simple md-success md-lg"
-            >View Login Page</md-button
-          >
+          <md-button href="#/login" class="md-simple md-success md-lg">View Login Page</md-button>
         </div>
       </div>
       <div class="section section-examples">
@@ -141,27 +120,15 @@
           <div class="md-layout">
             <div class="md-layout-item">
               <a href="#/landing" target="_blank">
-                <img
-                  :src="landing"
-                  alt="Rounded Image"
-                  class="img-raised rounded img-fluid"
-                />
+                <img :src="landing" alt="Rounded Image" class="img-raised rounded img-fluid" />
               </a>
-              <md-button href="#/landing" class="md-simple md-success md-lg"
-                >View Landing Page</md-button
-              >
+              <md-button href="#/landing" class="md-simple md-success md-lg">View Landing Page</md-button>
             </div>
             <div class="md-layout-item">
               <a href="#/profile" target="_blank">
-                <img
-                  :src="profile"
-                  alt="Rounded Image"
-                  class="img-raised rounded img-fluid"
-                />
+                <img :src="profile" alt="Rounded Image" class="img-raised rounded img-fluid" />
               </a>
-              <md-button href="#/profile" class="md-simple md-success md-lg"
-                >View Profile Page</md-button
-              >
+              <md-button href="#/profile" class="md-simple md-success md-lg">View Profile Page</md-button>
             </div>
           </div>
         </div>
@@ -172,16 +139,15 @@
             <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
               <h2>Do you love this UI Kit?</h2>
               <h4>
-                Cause if you do, it can be yours for FREE. Hit the buttons below
-                to navigate to our website where you can find the kit. Our
-                friends from
+                Cause if you do, it can be yours for FREE. Hit the buttons below to navigate to our website where you
+                can find the kit. Our friends from
                 <a
                   href="https://themeisle.com/?utm_campaign=mkfree-hestia&amp;utm_source=creativetim&amp;utm_medium=website"
                   target="_blank"
                   >ThemeIsle</a
                 >
-                created a Wordpress Theme which can be also downloaded for free.
-                Start a new project or give an old Bootstrap project a new look!
+                created a Wordpress Theme which can be also downloaded for free. Start a new project or give an old
+                Bootstrap project a new look!
               </h4>
             </div>
             <div class="md-layout-item md-size-50 md-small-size-100 mx-auto">
@@ -212,13 +178,10 @@
                   >Vue Material Dashboard PRO</a
                 >
                 and
-                <a
-                  href="https://www.creative-tim.com/product/vue-material-kit-pro?ref=utp-vmk-demos"
-                  target="_blank"
+                <a href="https://www.creative-tim.com/product/vue-material-kit-pro?ref=utp-vmk-demos" target="_blank"
                   >Vue Material Kit PRO</a
-                >. Every product has a huge number of components, sections and
-                example pages. Start Your Development With A Badass Bootstrap UI
-                Kit inspired by Material Design.
+                >. Every product has a huge number of components, sections and example pages. Start Your Development
+                With A Badass Bootstrap UI Kit inspired by Material Design.
               </h4>
             </div>
             <div class="md-layout-item md-size-50 md-small-size-100 mx-auto">
@@ -233,8 +196,7 @@
                   href="https://www.creative-tim.com/product/vue-material-dashboard-pro?ref=utp-vmd-demos"
                   class="md-button md-success md-lg md-upgrade"
                   target="_blank"
-                  ><md-icon>unarchive</md-icon>Vue Material Dashboard
-                  PRO</md-button
+                  ><md-icon>unarchive</md-icon>Vue Material Dashboard PRO</md-button
                 >
               </div>
             </div>
@@ -247,18 +209,10 @@
               </div>
             </div>
 
-            <md-button class="md-twitter"
-              ><i class="fab fa-twitter"></i>Tweet</md-button
-            >
-            <md-button class="md-facebook"
-              ><i class="fab fa-facebook-square"></i> Share</md-button
-            >
-            <md-button class="md-google"
-              ><i class="fab fa-google-plus"></i> Share</md-button
-            >
-            <md-button class="md-github"
-              ><i class="fab fa-github"></i> Star</md-button
-            >
+            <md-button class="md-twitter"><i class="fab fa-twitter"></i>Tweet</md-button>
+            <md-button class="md-facebook"><i class="fab fa-facebook-square"></i> Share</md-button>
+            <md-button class="md-google"><i class="fab fa-google-plus"></i> Share</md-button>
+            <md-button class="md-github"><i class="fab fa-github"></i> Star</md-button>
           </div>
         </div>
       </div>
@@ -287,50 +241,34 @@ export default {
     Notifications,
     TypographyImages,
     JavascriptComponents,
-    LoginCard
+    LoginCard,
   },
   name: "index",
   bodyClass: "index-page",
   props: {
     image: {
       type: String,
-      default: require("@/assets/img/vue-mk-header.jpg")
-    },
-    leaf4: {
-      type: String,
-      default: require("@/assets/img/leaf4.png")
-    },
-    leaf3: {
-      type: String,
-      default: require("@/assets/img/leaf3.png")
-    },
-    leaf2: {
-      type: String,
-      default: require("@/assets/img/leaf2.png")
-    },
-    leaf1: {
-      type: String,
-      default: require("@/assets/img/leaf1.png")
+      default: require("@/assets/img/main.jpg"),
     },
     signup: {
       type: String,
-      default: require("@/assets/img/city.jpg")
+      default: require("@/assets/img/city.jpg"),
     },
     landing: {
       type: String,
-      default: require("@/assets/img/landing.jpg")
+      default: require("@/assets/img/landing.jpg"),
     },
     profile: {
       type: String,
-      default: require("@/assets/img/profile.jpg")
-    }
+      default: require("@/assets/img/profile.jpg"),
+    },
   },
   data() {
     return {
       firstname: null,
       email: null,
       password: null,
-      leafShow: false
+      leafShow: false,
     };
   },
   methods: {
@@ -340,19 +278,20 @@ export default {
       } else {
         this.leafShow = true;
       }
-    }
+    },
   },
   computed: {
     headerStyle() {
       return {
-        backgroundImage: `url(${this.image})`
+        backgroundImage: `url(${this.image})`,
+        height: "500px",
       };
     },
     signupImage() {
       return {
-        backgroundImage: `url(${this.signup})`
+        backgroundImage: `url(${this.signup})`,
       };
-    }
+    },
   },
   mounted() {
     this.leafActive();
@@ -360,7 +299,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.leafActive);
-  }
+  },
 };
 </script>
 <style lang="scss">
@@ -374,5 +313,9 @@ export default {
   .btn-container {
     display: flex;
   }
+}
+
+.page-header {
+  height: 380px;
 }
 </style>
