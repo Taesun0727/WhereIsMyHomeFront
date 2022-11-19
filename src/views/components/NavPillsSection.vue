@@ -18,7 +18,7 @@
           >
             <!-- here you can add your content for tab-content -->
             <template slot="tab-pane-1">
-                안할건데?
+                <news></news>
                 <br /><br />
                 Dramatically visualize customer directed convergence without
                 revolutionary ROI.
@@ -80,10 +80,11 @@
 
 <script>
 import { Tabs } from "@/components";
-
+import News from "@/components/News.vue";
 export default {
   components: {
-    Tabs
+    Tabs,
+    News
   }
 };
 </script>
