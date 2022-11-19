@@ -64,6 +64,11 @@
                 </a>
               </li>
 
+              <md-list-item :to="{ name: 'house' }">
+                <i class="material-icons">house</i>
+                <p>House</p>
+              </md-list-item>
+
               <md-list-item :to="{ name: 'notice' }">
                 <i class="material-icons">content_paste</i>
                 <p>notice</p>
@@ -131,13 +136,13 @@
               </md-list-item>
 
               <md-list v-if="isLogin">
-                <md-list-item @click.prevent="onClickLogout" >
+                <md-list-item @click.prevent="onClickLogout">
                   <i class="material-icons">logout</i>
                   <p class="hidden-lg">Logout</p>
                   <md-tooltip md-direction="bottom">move to logout</md-tooltip>
                 </md-list-item>
 
-                <md-list-item :to="{name: 'mypage'}">
+                <md-list-item :to="{ name: 'mypage' }">
                   <i class="material-icons">account_circle</i>
                   <p class="hidden-lg">MyPage</p>
                   <md-tooltip md-direction="bottom">move to MyPage</md-tooltip>
