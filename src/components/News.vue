@@ -1,21 +1,22 @@
 <template>
     <div>
-        <thead>
-            <td>제목</td>
-            <td>본링크</td>
-            <td>링크</td>
-            <td>설명</td>
-            <td>발행날짜</td>
-        </thead>
-        <tbody>
-            <tr v-for="info in infos" :key="info.lastBuildDate" :info="info">
-                <td>{{info.title}}</td>
-                <td>{{info.originallink}}</td>
-                <td>{{info.link}}</td>
-                <td>{{info.description}}</td>
-                <td>{{info.pubDate}}</td>
-            </tr>
-        </tbody>
+        <md-table md-card>
+            <md-table-toolbar>
+                <h1 class="md-title">News</h1>
+            </md-table-toolbar>
+
+            <md-table-row>
+                <md-table-head>Title</md-table-head>
+                <md-table-head>Description</md-table-head>
+                <md-table-head>PubDate</md-table-head>
+            </md-table-row>
+
+            <md-table-row v-for="info in infos" :key="info.link" :info="info">
+                <a :href="info.link" target="_blank"><md-table-cell md-label="Title" v-html="info.title"></md-table-cell></a>
+                <md-table-cell md-label="Description" v-html="info.description"></md-table-cell>
+                <md-table-cell md-label="Pubdate" v-html="info.pubDate"></md-table-cell>
+            </md-table-row>
+        </md-table>
     </div>
 </template>
 
@@ -25,24 +26,24 @@ export default {
     name: "News",
     data() {
         return {
-            infos:{
-                title: '',
-                originallink: '',
-                link: '',
-                description : '',
-                pubDate : '',
-            },
+            infos:[
+                {
+                    title: '',
+                    originallink: '',
+                    link: '',
+                    description : '',
+                    pubDate : ''
+                }
+                
+            ],
         }
     },
     created() {
         http.get(`/naver`)
             .then(({data}) => (this.infos = data.items));
     },
-    methods: {
-    },
 }
 </script>
 
 <style>
-
 </style>

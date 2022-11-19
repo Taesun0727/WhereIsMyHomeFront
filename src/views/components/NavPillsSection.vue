@@ -19,9 +19,6 @@
             <!-- here you can add your content for tab-content -->
             <template slot="tab-pane-1">
                 <news></news>
-                <br /><br />
-                Dramatically visualize customer directed convergence without
-                revolutionary ROI.
             </template>
             <template slot="tab-pane-2">
               관심지역 없어 ㄱㅅㄲ야
