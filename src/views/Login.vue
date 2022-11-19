@@ -15,6 +15,9 @@
               <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
                 <i class="fab fa-google-plus-g"></i>
               </md-button>
+              <md-button slot="buttons" class="md-just-icon md-simple md-white">
+                <img src="@/assets/img/btnG_icon_square.png">
+              </md-button>
               <p slot="description" class="description">Or Be Classical</p>
               <!-- <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
