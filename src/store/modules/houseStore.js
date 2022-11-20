@@ -1,4 +1,4 @@
-import {  sidoList, gugunList, dongList, houseSearch, houseList, getHouse } from "@/api/house";
+import {  sidoList, gugunList, dongList, houseSearch, houseList, getHouse, getDeal } from "@/api/house";
 const houseStore = {
   namespaced: true,
   state: {
@@ -6,6 +6,7 @@ const houseStore = {
     guguns: [{ value: null, text: "선택하세요" }],
     dongs: [{ value: null, text: "선택하세요" }],
     houses: [],
+    deals: [],
     house: null,
   },
   mutations: {
@@ -42,7 +43,9 @@ const houseStore = {
     },
     SET_HOUSE(state, house) {
       state.house = house;
-
+    },
+    SET_DEAL(state, deals) {
+      state.deals = deals
     },
     SET_DETAIL_HOUSE(state, house) {
       state.house = house;
@@ -109,6 +112,15 @@ const houseStore = {
         aptCode,
         ({ data }) => {
           commit("SET_HOUSE", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      getDeal(
+        aptCode,
+        ({ data }) => {
+          commit("SET_DEAL", data);
         },
         (error) => {
           console.log(error);

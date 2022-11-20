@@ -55,7 +55,7 @@
       </md-field> -->
     </md-card>
     <md-card
-      style="position: absolute; top: 280px; left: 20px; width: 400px; height: 500px; opacity: 0.8; padding: 15px; overflow: scroll;"
+      style="position: absolute; top: 280px; left: 20px; width: 400px; height: 500px; opacity: 1; padding: 15px; overflow: scroll;"
       v-if="house"
     >
       <div>
@@ -70,25 +70,9 @@
         <road-view></road-view>
         <hr />
         <h5 class="title">실거래</h5>
-        ㅁㄴㅇㅁㄴ ㅁㄴㅇㅁㄴㅁㄴㅇㅁㄴ ㅁㄴㅇㅁㄴ
+        <deal-table></deal-table>
       </div>
     </md-card>
-
-    <!-- <div class="main main-raised" style="height: 650px">
-      <div class="section profile-content">
-        <div class="container">
-          <div class="md-layout">
-            <div class="md-layout-item md-size-75 mx-auto">
-              <title-component :title="title"></title-component>
-            </div>
-            <div class="md-layout-item md-size-100 mx-auto">
-
-              <kakao-map></kakao-map>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -100,6 +84,7 @@ const houseStore = "houseStore";
 // import { Tabs } from "@/components";
 import KakaoMap from "../components/kakaoMap.vue";
 import RoadView from "../components/roadview.vue";
+import DealTable from "../components/dealTable.vue";
 
 export default {
   name: "house",
@@ -123,6 +108,7 @@ export default {
     // Tabs,
     KakaoMap,
     RoadView,
+    DealTable,
   },
   watch: {
     sidoCode: function() {
@@ -148,7 +134,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(houseStore, ["sidos", "guguns", "dongs", "houses", "house"]),
+    ...mapState(houseStore, ["sidos", "guguns", "dongs", "houses", "house", "deals"]),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`,
