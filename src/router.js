@@ -83,7 +83,7 @@ export default new Router({
     {
       path: "/house",
       name: "house",
-      components: { default: House, header: MainNavbar, footer: MainFooter },
+      components: { default: House, header: MainNavbar },
     },
     {
       path: "/notice",
