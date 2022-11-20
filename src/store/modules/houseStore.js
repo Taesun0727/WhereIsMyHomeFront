@@ -1,4 +1,4 @@
-import {  sidoList, gugunList, dongList, houseSearch, houseList } from "@/api/house";
+import {  sidoList, gugunList, dongList, houseSearch, houseList, getHouse } from "@/api/house";
 const houseStore = {
   namespaced: true,
   state: {
@@ -39,7 +39,10 @@ const houseStore = {
     },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
-      console.log(state.houses)
+    },
+    SET_HOUSE(state, house) {
+      state.house = house;
+
     },
     SET_DETAIL_HOUSE(state, house) {
       state.house = house;
@@ -78,7 +81,7 @@ const houseStore = {
         }
       );
     },
-    getHouse: ({ commit }, dongCode) => {
+    getHouses: ({ commit }, dongCode) => {
       houseList(
         dongCode,
         ({ data }) => {
@@ -94,6 +97,18 @@ const houseStore = {
         aptName,
         ({ data }) => {
           commit("SET_HOUSE_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getInfoHouse: ({ commit }, aptCode) => {
+      console.log(aptCode)
+      getHouse(
+        aptCode,
+        ({ data }) => {
+          commit("SET_HOUSE", data);
         },
         (error) => {
           console.log(error);

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const houseStore = "houseStore";
 export default {
@@ -42,6 +42,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(houseStore, ["getInfoHouse"]),
     initMap() {
       const container = document.getElementById("map");
       const options = {
@@ -76,6 +77,7 @@ export default {
           });
           kakao.maps.event.addListener(marker, "click", () => {
             infowindow.open(this.map, marker);
+            this.getInfoHouse(element.aptCode);
           });
           this.markers.push(marker);
         });

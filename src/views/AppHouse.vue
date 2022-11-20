@@ -12,7 +12,7 @@
       <kakao-map></kakao-map>
     </div>
     <md-card
-      style="position: absolute; top: 150px; left: 20px; width: 400px; height: 110px; opacity: 0.8; padding: 15px;"
+      style="position: absolute; top: 150px; left: 20px; width: 400px; height: 110px; opacity: 0.9; padding: 15px;"
     >
       <div class="flex-column" style="height: 30px;">
         <md-radio v-model="radio" :value="true">동검색</md-radio>
@@ -54,6 +54,25 @@
         <md-select v-model="movie" name="movie" id="movie"> </md-select>
       </md-field> -->
     </md-card>
+    <md-card
+      style="position: absolute; top: 280px; left: 20px; width: 400px; height: 500px; opacity: 0.8; padding: 15px; overflow: scroll;"
+      v-if="house"
+    >
+      <div>
+        <div>
+          <h4 class="title">
+            {{ house.aptName }}<i class="material-icons" style="float: right; color: red;">favorite_border</i>
+          </h4>
+          <p>주소 : {{ house.roadName }}</p>
+          <p>건축년도 : {{ house.buildYear }}</p>
+        </div>
+        <hr />
+        <road-view></road-view>
+        <hr />
+        <h5 class="title">실거래</h5>
+        ㅁㄴㅇㅁㄴ ㅁㄴㅇㅁㄴㅁㄴㅇㅁㄴ ㅁㄴㅇㅁㄴ
+      </div>
+    </md-card>
 
     <!-- <div class="main main-raised" style="height: 650px">
       <div class="section profile-content">
@@ -80,6 +99,8 @@ const houseStore = "houseStore";
 // import TitleComponent from "../components/TitleComponent.vue";
 // import { Tabs } from "@/components";
 import KakaoMap from "../components/kakaoMap.vue";
+import RoadView from "../components/roadview.vue";
+
 export default {
   name: "house",
   data() {
@@ -101,6 +122,7 @@ export default {
     // TitleComponent,
     // Tabs,
     KakaoMap,
+    RoadView,
   },
   watch: {
     sidoCode: function() {
@@ -115,18 +137,18 @@ export default {
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     dongCode: function() {
-      if (this.dongCode) this.getHouse(this.dongCode);
+      if (this.dongCode) this.getHouses(this.dongCode);
     },
   },
   methods: {
-    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouse", "searchHouse", "getHouseList"]),
+    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouses", "searchHouse"]),
     ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_DONG_LIST", "CLEAR_APT_LIST"]),
     searchAptName() {
       this.searchHouse(this.aptName);
     },
   },
   computed: {
-    ...mapState(houseStore, ["sidos", "guguns", "dongs", "houses"]),
+    ...mapState(houseStore, ["sidos", "guguns", "dongs", "houses", "house"]),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`,
