@@ -9,29 +9,30 @@
       </div> -->
       <div class="md-layout">
         <div class="md-layout-item md-size-50 md-small-size-100">
-          <tabs
+          <!-- <tabs
             :tab-name="['Apt검색', 'Bookmark']"
             :tab-icon="['dashboard', 'schedule']"
             plain
             nav-pills-icons
             color-button="primary"
-          >
+          > -->
             <!-- here you can add your content for tab-content -->
-            <template slot="tab-pane-1">
+            <template>
                 <news></news>
             </template>
-            <template slot="tab-pane-2">
-              관심지역 없어 ㄱㅅㄲ야
-              <br /><br />
-              Dramatically maintain clicks-and-mortar solutions without
-              functional solutions.
-            </template>
-          </tabs>
+            
+          <!-- </tabs> -->
         </div>
 
         <div class="md-layout-item md-size-50 md-small-size-100">
-          
-            <template slot="tab-pane-1">
+          <!-- <tabs
+            :tab-name="['Apt검색', 'Bookmark']"
+            :tab-icon="['dashboard', 'schedule']"
+            plain
+            nav-pills-icons
+            color-button="primary"
+          > -->
+            <template>
               <div class="container">
                 안할건데?
                 <br /><br />
@@ -39,7 +40,7 @@
                 revolutionary ROI.
               </div>
             </template>
-            
+          <!-- </tabs>   -->
         </div>
 
 
@@ -76,11 +77,11 @@
 </template>
 
 <script>
-import { Tabs } from "@/components";
+// import { Tabs } from "@/components";
 import News from "@/components/News.vue";
 export default {
   components: {
-    Tabs,
+    // Tabs,
     News
   }
 };

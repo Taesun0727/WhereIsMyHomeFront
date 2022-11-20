@@ -1,9 +1,9 @@
 <template>
     <div>
         <md-table md-card>
-            <md-table-toolbar>
+            <div style="padding: 20px">
                 <h1 class="md-title">News</h1>
-            </md-table-toolbar>
+            </div>
 
             <md-table-row>
                 <md-table-head>Title</md-table-head>
