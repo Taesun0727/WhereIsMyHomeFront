@@ -5,6 +5,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
+const houseStore = "houseStore";
 export default {
   name: "kakaoMap",
   data() {
@@ -51,14 +54,46 @@ export default {
       this.map = new kakao.maps.Map(container, options);
     },
   },
+  computed: {
+    ...mapState(houseStore, ["houses"]),
+  },
+  watch: {
+    houses() {
+      if (this.markers.length > 0) {
+        this.markers.forEach((marker) => marker.setMap(null));
+      }
+
+      if (this.houses.length > 0) {
+        this.houses.forEach((element) => {
+          const infowindow = new kakao.maps.InfoWindow({
+            removable: true,
+            content: `<div style="padding: 5px;">${element.aptName}</div>`,
+          });
+          const marker = new kakao.maps.Marker({
+            title: element.aptName,
+            map: this.map,
+            position: new kakao.maps.LatLng(element.lat, element.lng),
+          });
+          kakao.maps.event.addListener(marker, "click", () => {
+            infowindow.open(this.map, marker);
+          });
+          this.markers.push(marker);
+        });
+        const positions = this.houses.map((position) => new kakao.maps.LatLng(position.lat, position.lng));
+        const bounds = positions.reduce((bounds, latlng) => bounds.extend(latlng), new kakao.maps.LatLngBounds());
+
+        this.map.setBounds(bounds);
+      }
+      console.log(this.markers);
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #map {
-  width: 400px;
-  height: 400px;
+  height: 750px;
 }
 
 .button-group {

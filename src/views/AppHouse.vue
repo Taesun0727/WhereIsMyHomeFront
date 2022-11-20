@@ -1,7 +1,61 @@
 <template>
   <div class="wrapper">
     <parallax class="section page-header header-filter" :style="headerStyle"></parallax>
-    <div class="main main-raised">
+    <div class="md-layout-item md-size-100 mx-auto" style="padding: 0;">
+      <!-- <router-view style="transform: translate3d(0, -20%, 0);"></router-view> -->
+      <!-- <md-card>
+        <md-card-actions>
+          <md-button>Action</md-button>
+          <md-button>Action</md-button>
+        </md-card-actions>
+      </md-card> -->
+      <kakao-map></kakao-map>
+    </div>
+    <md-card
+      style="position: absolute; top: 150px; left: 20px; width: 400px; height: 110px; opacity: 0.8; padding: 15px;"
+    >
+      <div class="flex-column" style="height: 30px;">
+        <md-radio v-model="radio" :value="true">동검색</md-radio>
+        <md-radio v-model="radio" :value="false">아파트 검색</md-radio>
+      </div>
+      <div v-if="radio">
+        <md-field class="block" style="width: 30%; margin-right: 15px; ">
+          <label for="sidos">지역</label>
+          <md-select v-model="sidoCode">
+            <md-option v-for="sido in sidos" v-bind:key="sido.value" :value="sido.value">{{ sido.text }}</md-option>
+          </md-select>
+        </md-field>
+        <md-field class="block" style="width: 30%; margin-right: 15px; ">
+          <label for="guguns">구/구군</label>
+          <md-select v-model="gugunCode" name="guguns" id="guguns">
+            <md-option v-for="gugun in guguns" v-bind:key="gugun.value" :value="gugun.value">{{
+              gugun.text
+            }}</md-option>
+          </md-select>
+        </md-field>
+        <md-field class="block" style="width: 30%; ">
+          <label for="guguns">법정동</label>
+          <md-select v-model="dongCode" name="dongs" id="dongs">
+            <md-option v-for="dong in dongs" v-bind:key="dong.value" :value="dong.value">{{ dong.text }}</md-option>
+          </md-select>
+        </md-field>
+      </div>
+      <div v-else>
+        <md-field>
+          <label>아파트명</label>
+          <md-input v-model="aptName" type="text" @keyup.enter="searchAptName"></md-input>
+          <md-button class="md-primary" @click="searchAptName" style="height: 30px;"
+            ><i class="material-icons">search</i></md-button
+          >
+        </md-field>
+      </div>
+      <!-- <md-field>
+        <label for="movie">법정동</label>
+        <md-select v-model="movie" name="movie" id="movie"> </md-select>
+      </md-field> -->
+    </md-card>
+
+    <!-- <div class="main main-raised" style="height: 650px">
       <div class="section profile-content">
         <div class="container">
           <div class="md-layout">
@@ -9,65 +63,33 @@
               <title-component :title="title"></title-component>
             </div>
             <div class="md-layout-item md-size-100 mx-auto">
-              <!-- <router-view style="transform: translate3d(0, -20%, 0);"></router-view> -->
 
-              <div class="md-layout-item md-size-100 md-small-size-100" style="transform: translate3d(0, -50%, 0);">
-                <tabs
-                  :tab-name="['Apt검색', 'Bookmark']"
-                  :tab-icon="['dashboard', 'schedule']"
-                  plain
-                  nav-pills-icons
-                  color-button="info"
-                >
-                  <!-- here you can add your content for tab-content -->
-                  <template slot="tab-pane-1">
-                    <md-card>
-                      <md-card-actions>
-                        <div class="md-layout" style="display : block;">asdasd</div>
-                        <div class="md-layout" style="display: block;">
-                          <div class="md-layout-item md-size-30">
-                            <md-card>asd</md-card>
-                          </div>
-                          <div class="md-size-70">
-                            <kakao-map></kakao-map>
-                          </div>
-                        </div>
-                      </md-card-actions>
-                    </md-card>
-                  </template>
-                  <template slot="tab-pane-2">
-                    <md-card>
-                      <md-card-actions class="md-size-100">
-                        <md-button>Action</md-button>
-                        <md-button>Action</md-button>
-                      </md-card-actions>
-                    </md-card>
-                  </template>
-                </tabs>
-              </div>
+              <kakao-map></kakao-map>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import TitleComponent from "../components/TitleComponent.vue";
-import { Tabs } from "@/components";
+import { mapState, mapActions, mapMutations } from "vuex";
+
+const houseStore = "houseStore";
+// import TitleComponent from "../components/TitleComponent.vue";
+// import { Tabs } from "@/components";
 import KakaoMap from "../components/kakaoMap.vue";
 export default {
   name: "house",
   data() {
     return {
-      title: "House",
+      sidoCode: null,
+      gugunCode: null,
+      dongCode: null,
+      radio: true,
+      aptName: "",
     };
-  },
-  components: {
-    TitleComponent,
-    Tabs,
-    KakaoMap,
   },
   props: {
     header: {
@@ -75,18 +97,56 @@ export default {
       default: require("@/assets/img/main.jpg"),
     },
   },
+  components: {
+    // TitleComponent,
+    // Tabs,
+    KakaoMap,
+  },
+  watch: {
+    sidoCode: function() {
+      this.CLEAR_GUGUN_LIST();
+      this.CLEAR_DONG_LIST();
+      this.gugunCode = null;
+      if (this.sidoCode) this.getGugun(this.sidoCode);
+    },
+    gugunCode: function() {
+      this.CLEAR_DONG_LIST();
+      this.dongCode = null;
+      if (this.gugunCode) this.getDong(this.gugunCode);
+    },
+    dongCode: function() {
+      if (this.dongCode) this.getHouse(this.dongCode);
+    },
+  },
+  methods: {
+    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouse", "searchHouse", "getHouseList"]),
+    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_DONG_LIST", "CLEAR_APT_LIST"]),
+    searchAptName() {
+      this.searchHouse(this.aptName);
+    },
+  },
   computed: {
+    ...mapState(houseStore, ["sidos", "guguns", "dongs", "houses"]),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`,
       };
     },
   },
+  created() {
+    this.CLEAR_SIDO_LIST();
+    this.CLEAR_APT_LIST();
+    this.CLEAR_DONG_LIST();
+    this.getSido();
+  },
 };
 </script>
 
 <style scoped>
 .page-header {
-  height: 200px;
+  height: 100px;
+}
+.block {
+  display: inline-block;
 }
 </style>

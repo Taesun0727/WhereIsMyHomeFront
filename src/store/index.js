@@ -5,6 +5,7 @@ import createPersistedState from "vuex-persistedstate";
 import userStore from "@/store/modules/userStore"
 import noticeStore from "@/store/modules/noticeStore"
 import qnaStore from "@/store/modules/qnaStore"
+import houseStore from "@/store/modules/houseStore"
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   modules: {
     userStore,
     noticeStore,
-    qnaStore
+    qnaStore,
+    houseStore,
   },
   plugins: [
     createPersistedState({
