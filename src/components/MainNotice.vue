@@ -1,15 +1,20 @@
 <template>
     <div>
         <md-table md-card>
-            <div style="padding: 20px">
-                <h1 class="md-title">공지사항</h1>
-            </div>
+            <md-table-toolbar>
+                <div class="md-toolbar-section-start">
+                    <h3 style="color:black; font-weight:bold;">공지사항</h3>
+                </div>
+                <div class="md-toolbar-section-end">
+                    <router-link :to="{name : 'notice'}">더보기 +</router-link>
+                </div>
+            </md-table-toolbar>
 
-            <md-table-row>
-                <md-table-head>Title</md-table-head>
-                <!-- <md-table-head>Description</md-table-head> -->
-                <md-table-head>PubDate</md-table-head>
-            </md-table-row>
+            
+            <md-table-head>Title</md-table-head>
+            <!-- <md-table-head>Description</md-table-head> -->
+            <md-table-head>PubDate</md-table-head>
+            
 
             <md-table-row v-for="notice in notices" :key="notice.num" :notice="notice">
                 <md-table-cell md-label="Title" >
