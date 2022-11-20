@@ -33,12 +33,7 @@
             color-button="primary"
           > -->
             <template>
-              <div class="container">
-                안할건데?
-                <br /><br />
-                Dramatically visualize customer directed convergence without
-                revolutionary ROI.
-              </div>
+              <main-notice></main-notice>
             </template>
           <!-- </tabs>   -->
         </div>
@@ -79,10 +74,12 @@
 <script>
 // import { Tabs } from "@/components";
 import News from "@/components/News.vue";
+import MainNotice from "@/components/MainNotice.vue";
 export default {
   components: {
     // Tabs,
-    News
+    News,
+    MainNotice,
   }
 };
 </script>

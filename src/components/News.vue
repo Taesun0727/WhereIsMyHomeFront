@@ -7,13 +7,13 @@
 
             <md-table-row>
                 <md-table-head>Title</md-table-head>
-                <md-table-head>Description</md-table-head>
+                <!-- <md-table-head>Description</md-table-head> -->
                 <md-table-head>PubDate</md-table-head>
             </md-table-row>
 
             <md-table-row v-for="info in infos" :key="info.link" :info="info">
                 <a :href="info.link" target="_blank"><md-table-cell md-label="Title" v-html="info.title"></md-table-cell></a>
-                <md-table-cell md-label="Description" v-html="info.description"></md-table-cell>
+                <!-- <md-table-cell md-label="Description" v-html="info.description"></md-table-cell> -->
                 <md-table-cell md-label="Pubdate" v-html="info.pubDate"></md-table-cell>
             </md-table-row>
         </md-table>
