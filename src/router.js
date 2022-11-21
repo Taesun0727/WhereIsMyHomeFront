@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Index from "@/views/Index.vue";
 import Landing from "@/views/Landing.vue";
 import Login from "@/views/Login.vue";
+import kakao from "@/views/KakaoLogin.vue";
 import Profile from "@/views/Profile.vue";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
@@ -42,6 +43,15 @@ export default new Router({
       path: "/landing",
       name: "landing",
       components: { default: Landing, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" }
+      }
+    },
+    {
+      path: "/kakao",
+      name: "kakao",
+      components: { default: kakao, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
