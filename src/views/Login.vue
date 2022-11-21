@@ -85,7 +85,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(userStore, ["userConfirm", "getUserInfo", "naverConfirm"]),
+    ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
     async confirm() {
       await this.userConfirm(this.user);
       let token = sessionStorage.getItem("access-token");
@@ -96,9 +96,9 @@ export default {
         this.$router.push({ name: "index" });
       }
     },
-    kakaologin() {
+    async kakaologin(){
       window.location.replace(KAKAO_AUTH_URL);
-    },
+    }
   },
 };
 </script>
