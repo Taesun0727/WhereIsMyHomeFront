@@ -30,4 +30,22 @@ function getDeal(params, success, fail) {
   api.get(`/house/deal/${params}`).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, dongList, houseSearch, houseList, getHouse, getDeal };
+async function getInterest(params, success, fail) {
+  await api.get(`/interest/${params.userinfo_num}/${params.aptCode}`).then(success).catch(fail);
+}
+
+async function getInterestList(param, success, fail) {
+  await api.get(`/interest/${param}`).then(success).catch(fail);
+}
+
+async function insertInterest(params, success, fail) {
+  // api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
+  await api.post(`/interest`, params).then(success).catch(fail);
+}
+
+async function deleteInterest(params, success, fail) {
+  // api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
+  await api.delete(`/interest/${params.userinfo_num}/${params.aptCode}`).then(success).catch(fail);
+}
+
+export { sidoList, gugunList, dongList, houseSearch, houseList, getHouse, getDeal, getInterest, insertInterest, deleteInterest, getInterestList };

@@ -17,7 +17,6 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import axios from "@/api/http.js";
 
 import { mapActions, mapState } from "vuex";
 

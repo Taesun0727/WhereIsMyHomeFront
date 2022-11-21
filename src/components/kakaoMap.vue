@@ -8,6 +8,7 @@
 import { mapState, mapActions } from "vuex";
 
 const houseStore = "houseStore";
+const userStore = "userStore";
 export default {
   name: "kakaoMap",
   data() {
@@ -34,7 +35,7 @@ export default {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(37.514575, 127.0495556),
-        level: 7,
+        level: 5,
       };
 
       //지도 객체를 등록합니다.
@@ -43,7 +44,8 @@ export default {
     },
   },
   computed: {
-    ...mapState(houseStore, ["houses"]),
+    ...mapState(houseStore, ["houses", "house"]),
+    ...mapState(userStore, ["userInfo"]),
   },
   watch: {
     houses() {
@@ -64,7 +66,11 @@ export default {
           });
           kakao.maps.event.addListener(marker, "click", () => {
             infowindow.open(this.map, marker);
-            this.getInfoHouse(element.aptCode);
+            let data = {
+              aptCode: element.aptCode,
+              userinfo_num: this.userInfo.userinfo_num,
+            };
+            this.getInfoHouse(data);
           });
           this.markers.push(marker);
         });
@@ -73,6 +79,11 @@ export default {
 
         this.map.setBounds(bounds);
       }
+    },
+    house() {
+      console.log(12345);
+      const bounds = new kakao.maps.LatLng(this.house.lat, this.house.lng);
+      this.map.setCenter(bounds);
     },
   },
 };

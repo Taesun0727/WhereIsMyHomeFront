@@ -15,10 +15,11 @@
       style="position: absolute; top: 150px; left: 20px; width: 400px; height: 110px; opacity: 0.9; padding: 15px;"
     >
       <div class="flex-column" style="height: 30px;">
-        <md-radio v-model="radio" :value="true">동검색</md-radio>
-        <md-radio v-model="radio" :value="false">아파트 검색</md-radio>
+        <md-radio v-model="radio" :value="1">동검색</md-radio>
+        <md-radio v-model="radio" :value="2">아파트 검색</md-radio>
+        <md-radio v-model="radio" :value="3">관심지역</md-radio>
       </div>
-      <div v-if="radio">
+      <div v-if="radio === 1">
         <md-field class="block" style="width: 30%; margin-right: 15px; ">
           <label for="sidos">지역</label>
           <md-select v-model="sidoCode">
@@ -40,7 +41,7 @@
           </md-select>
         </md-field>
       </div>
-      <div v-else>
+      <div v-else-if="radio === 2">
         <md-field>
           <label>아파트명</label>
           <md-input v-model="aptName" type="text" @keyup.enter="searchAptName"></md-input>
@@ -56,12 +57,28 @@
     </md-card>
     <md-card
       style="position: absolute; top: 280px; left: 20px; width: 400px; height: 500px; opacity: 1; padding: 15px; overflow: scroll;"
-      v-if="house"
+      v-if="cardView"
     >
-      <div>
+      <div v-if="detailView">
         <div>
           <h4 class="title">
-            {{ house.aptName }}<i class="material-icons" style="float: right; color: red;">favorite_border</i>
+            {{ house.aptName }}
+            <button
+              class="material-icons"
+              style="float: right; color: red; border: 0; background: white; cursor: pointer;"
+              @click="checkInterest"
+              v-if="interest"
+            >
+              favorite
+            </button>
+            <button
+              class="material-icons"
+              style="float: right; color: red; border: 0; background: white; cursor: pointer;"
+              @click="checkInterest"
+              v-else
+            >
+              favorite_border
+            </button>
           </h4>
           <p>주소 : {{ house.roadName }}</p>
           <p>건축년도 : {{ house.buildYear }}</p>
@@ -71,7 +88,11 @@
         <hr />
         <h5 class="title">실거래</h5>
         <deal-table></deal-table>
+        <div style="text-align: center;">
+          <md-button class="md-theme-default" style="text-align: center;" @click="prev">목록</md-button>
+        </div>
       </div>
+      <house-list v-else></house-list>
     </md-card>
   </div>
 </template>
@@ -80,11 +101,14 @@
 import { mapState, mapActions, mapMutations } from "vuex";
 
 const houseStore = "houseStore";
+const userStore = "userStore";
 // import TitleComponent from "../components/TitleComponent.vue";
 // import { Tabs } from "@/components";
 import KakaoMap from "../components/kakaoMap.vue";
 import RoadView from "../components/roadview.vue";
 import DealTable from "../components/dealTable.vue";
+import HouseList from "../components/house/HouseList";
+import swal from "sweetalert";
 
 export default {
   name: "house",
@@ -93,7 +117,7 @@ export default {
       sidoCode: null,
       gugunCode: null,
       dongCode: null,
-      radio: true,
+      radio: 1,
       aptName: "",
     };
   },
@@ -109,6 +133,7 @@ export default {
     KakaoMap,
     RoadView,
     DealTable,
+    HouseList,
   },
   watch: {
     sidoCode: function() {
@@ -125,16 +150,75 @@ export default {
     dongCode: function() {
       if (this.dongCode) this.getHouses(this.dongCode);
     },
+    radio: function() {
+      this.INIT_VIEW();
+      if (this.radio == 3) {
+        if (this.userInfo.userinfoLevel == 3) {
+          swal({
+            title: "조회 실패!",
+            text: "로그인이 필요한 서비스입니다.",
+            icon: "warning",
+          }).then(() => {
+            this.$router.push({ name: "login" });
+          });
+        } else {
+          this.GetInterests(this.userInfo.userinfo_num);
+        }
+      }
+    },
   },
   methods: {
-    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouses", "searchHouse"]),
-    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_DONG_LIST", "CLEAR_APT_LIST"]),
+    ...mapActions(houseStore, [
+      "getSido",
+      "getGugun",
+      "getDong",
+      "getHouses",
+      "searchHouse",
+      "InsertInterest",
+      "DeleteInterest",
+      "GetInterests",
+    ]),
+    ...mapMutations(houseStore, [
+      "CLEAR_SIDO_LIST",
+      "CLEAR_GUGUN_LIST",
+      "CLEAR_DONG_LIST",
+      "CLEAR_APT_LIST",
+      "CHANGE_DETAIL_VIEW",
+      "INIT_VIEW",
+    ]),
     searchAptName() {
       this.searchHouse(this.aptName);
     },
+    checkInterest() {
+      let data = {
+        aptCode: this.house.aptCode,
+        userinfo_num: this.userInfo.userinfo_num,
+      };
+
+      if (!this.interest) {
+        this.InsertInterest(data);
+      } else {
+        this.DeleteInterest(data);
+      }
+    },
+    prev() {
+      this.CHANGE_DETAIL_VIEW();
+    },
   },
   computed: {
-    ...mapState(houseStore, ["sidos", "guguns", "dongs", "houses", "house", "deals"]),
+    ...mapState(houseStore, [
+      "sidos",
+      "guguns",
+      "dongs",
+      "houses",
+      "house",
+      "deals",
+      "interest",
+      "interests",
+      "detailView",
+      "cardView",
+    ]),
+    ...mapState(userStore, ["userInfo"]),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`,
