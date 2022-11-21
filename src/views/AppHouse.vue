@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <parallax class="section page-header header-filter" :style="headerStyle"></parallax>
     <div class="md-layout-item md-size-100 mx-auto" style="padding: 0;">
       <!-- <router-view style="transform: translate3d(0, -20%, 0);"></router-view> -->
       <!-- <md-card>
