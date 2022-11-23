@@ -14,7 +14,7 @@
                     <h5 v-if="!isModify">{{userInfo.userinfo_nick}}</h5>
                     <md-field md-inline v-else>
                       <label>nickname</label>
-                      <md-input style="d-inline" v-model="userInfo.userinfo_nick"></md-input>
+                      <md-input style="width:70%;" v-model="userInfo.userinfo_nick"></md-input>
                       <md-button style="d-inline" @click="Modify">수정하기</md-button>
                     </md-field>
                   </div>
