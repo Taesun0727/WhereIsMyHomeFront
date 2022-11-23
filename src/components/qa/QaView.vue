@@ -1,23 +1,33 @@
 <template>
   <div class="wrapper">
-    <h1>{{ qna.qa_title }}</h1>
-    <h5>{{ qna.qa_title }}</h5>
-    <h4>
-      {{ qna.qa_title }}
-    </h4>
-    <hr />
-    <div v-if="qna.qa_status == 1">
-      <h5>{{ answer.qa_register_date }}</h5>
-      <h4>{{ answer.qa_content }}</h4>
-    </div>
-    <div v-else>
-      <h3 v-if="userInfo.userinfo_level == 2">답변 준비중입니다.</h3>
-      <div v-else>
-        <vue-editor v-model="inputQna.qa_content" />
-        <md-button class="md-success" style="float: right;" @click="write()">등록</md-button>
+    <md-card>
+      <h1 class="title" style="display: inline-block;">Q.</h1>
+      <h2 style="display: inline-block;">{{ qna.qa_title }}</h2>
+      <h5>{{ qna.qa_register_date }}</h5>
+      <h4>
+        <label v-html="qna.qa_content"></label>
+      </h4>
+    </md-card>
+
+    <md-card>
+      <h1 class="title" style="display: inline-block;">A.</h1>
+      <div v-if="qna.qa_status == 1" style="display: inline-block;">
+        <!-- <h5>{{ answer.qa_register_date }}</h5> -->
+        <h3 style="display: inline-block;">
+          <label v-html="answer.qa_content"></label>
+        </h3>
       </div>
-    </div>
-    <md-button :to="{ name: 'qalist' }">목록</md-button>
+      <div v-else style="display: inline-block;">
+        <h3 v-if="userInfo.userinfo_level == 2">답변 준비중입니다.</h3>
+        <div v-else>
+          <vue-editor v-model="inputQna.qa_content" />
+          <md-button class="md-success" style="float: right;" @click="write()">등록</md-button>
+        </div>
+      </div>
+    </md-card>
+    <diV style="text-align: center;">
+      <md-button :to="{ name: 'qalist' }" style="text-align: center;">목록</md-button>
+    </diV>
   </div>
 </template>
 
@@ -67,10 +77,13 @@ export default {
 
 <style scoped>
 .wrapper {
-  transform: translate3d(0, -60%, 0);
-  text-align: center;
+  transform: translate3d(0, -30%, 0);
 }
 h5 {
   text-align: right;
+}
+
+.md-card {
+  padding: 15px;
 }
 </style>

@@ -20,11 +20,11 @@ export default {
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
-      this.initMap();
+      this.initRoadView();
     } else {
       const script = document.createElement("script");
       /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
+      script.onload = () => kakao.maps.load(this.initRoadView);
       script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=8a8e4361ef4ba871d6d6f591269b5cba";
       document.head.appendChild(script);
     }
@@ -33,11 +33,11 @@ export default {
     addKakaoMapScript() {
       const script = document.createElement("script");
       /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
+      script.onload = () => kakao.maps.load(this.initRoadView);
       script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=8a8e4361ef4ba871d6d6f591269b5cba";
       document.head.appendChild(script);
     },
-    initMap() {
+    initRoadView() {
       // var roadviewContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
       var roadviewContainer = document.getElementById("roadview");
       var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체

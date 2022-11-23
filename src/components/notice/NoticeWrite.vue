@@ -1,5 +1,5 @@
 <template>
-  <div style="transform: translate3d(0, -60%, 0);">
+  <div style="transform: translate3d(0, -30%, 0);">
     <notice-input type="register"></notice-input>
   </div>
 </template>
