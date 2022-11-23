@@ -3,16 +3,16 @@
     <div class="section page-header header-filter" :style="headerStyle">
       <div class="container">
         <div class="md-layout">
-          <div class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto">
-            <login-card header-color="red" v-if="userInfo" style="width:600px;">
+          <div class="mx-auto">
+            <login-card header-color="green" v-if="userInfo" style="width:600px;">
               <h4 slot="title" class="card-title">My Page</h4>
               <p slot="description" class="description">User</p>
 
               <span slot="description" class="nickname">
                   <div style="display:flex; align-items:center;">
-                    <h5>Nickname :</h5>
-                    <h5 v-if="!isModify">{{userInfo.userinfo_nick}}</h5>
-                    <md-field md-inline v-else>
+                    <!-- <h5>Nickname :</h5> -->
+                    <h5 v-if="!isModify">Nickname : {{userInfo.userinfo_nick}}</h5>
+                    <md-field v-else>
                       <label>nickname</label>
                       <md-input style="d-inline" v-model="userInfo.userinfo_nick"></md-input>
                       <md-button style="d-inline" @click="Modify">수정하기</md-button>
@@ -29,8 +29,9 @@
               
               <span slot="description" class="id" v-else>
                 <div style="display:flex; align-items:center;">
-                  <h5>PW : </h5>
+                  <!-- <h5>PW : </h5> -->
                   <md-field>
+                    <label>password</label>
                     <md-input style="d-inline" v-model="userInfo.userinfo_password" type="password"></md-input>
                   </md-field>
                   <md-button style="d-inline" @click="PwModify">수정하기</md-button>
@@ -40,7 +41,7 @@
               <md-button slot="footer" class="md-simple md-success md-lg" @click="isModify = !isModify">
                 UserModify
               </md-button>
-              <md-button href="/" slot="footer" class="md-simple md-success md-lg" @click="Delete">
+              <md-button slot="footer" class="md-simple md-success md-lg" @click="Delete">
                 UserDelete
               </md-button>
 
@@ -79,17 +80,17 @@ export default {
       },
     };
   },
-  props: {
-    header: {
+  props:{
+    image: {
       type: String,
-      default: require("@/assets/img/profile_city.jpg"),
+      default: require("@/assets/img/main.jpg"),
     },
   },
   computed: {
     ...mapState(userStore, ["userInfo", "isLoginError", "isLogin", "isValidToken"]),
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`,
+        backgroundImage: `url(${this.image})`,
       };
     },
   },
@@ -97,7 +98,7 @@ export default {
     ...mapActions(userStore, ["userConfirm", "getUserInfo", "userDelete", "userModify", "userPwModify"]),
     async Delete(){
       await this.userDelete(this.userInfo.userinfo_num);
-
+      // console.log(this.userInfo);
       if(this.userInfo){
         this.$router.push({name: "index"});
       }
