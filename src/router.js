@@ -9,6 +9,7 @@ import MainFooter from "@/layout/MainFooter.vue";
 import Join from "@/views/Join.vue";
 import MyPage from "@/views/MyPage.vue";
 
+import News from "@/components/News.vue";
 import House from "@/views/AppHouse.vue";
 
 import Notice from "@/views/AppNotice.vue";
@@ -77,6 +78,14 @@ export default new Router({
       path: "/mypage",
       name: "mypage",
       components: { default: MyPage, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 }
+      }
+    },
+    {
+      path: "/news",
+      name: "news",
+      components: { default: News, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 }
       }

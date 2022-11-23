@@ -28,7 +28,7 @@
               </md-field> -->
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
-                <label>Email...</label>
+                <label>ID...</label>
                 <md-input v-model="user.userinfo_id" type="email"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
