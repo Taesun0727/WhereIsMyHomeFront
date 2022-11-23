@@ -1,11 +1,43 @@
 <template>
   <div>
-    <div id="map"></div>
+    <div id="map" style="height: 100vh; z-index: 1;"></div>
+    <ul id="category" style="position: absolute; top: 100px; right: 20px; z-index: 3; width: 50px; padding-left: 0px;">
+      <li id="BK9" data-order="0" @click="changeFlag(0)">
+        <img src="../../src/assets/img/bank.png" style="width: 35px" />
+        은행
+      </li>
+      <li id="MT1" data-order="1" @click="changeFlag(1)">
+        <img src="../../src/assets/img/mart.png" style="width: 35px" />
+        마트
+      </li>
+      <li id="PM9" data-order="2" @click="changeFlag(2)">
+        <img src="../../src/assets/img/hospital.png" style="width: 35px" />
+        병원
+      </li>
+      <li id="OL7" data-order="3" @click="changeFlag(3)">
+        <img src="../../src/assets/img/cafe.png" style="width: 35px" />
+        카페
+      </li>
+      <li id="CE7" data-order="4" @click="changeFlag(4)">
+        <img src="../../src/assets/img/school.png" style="width: 35px" />
+        학교
+      </li>
+      <li id="CS2" data-order="5" @click="changeFlag(5)">
+        <img src="../../src/assets/img/subway.png" style="width: 35px" />
+        지하철
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import SchoolIcon from "../assets/img/school.png";
+import SubwayIcon from "../assets/img/subway.png";
+import MartIcon from "../assets/img/mart.png";
+import HospitalIcon from "../assets/img/hospital.png";
+import CafeIcon from "../assets/img/cafe.png";
+import BankIcon from "../assets/img/bank.png";
 
 const houseStore = "houseStore";
 const userStore = "userStore";
@@ -14,7 +46,17 @@ export default {
   data() {
     return {
       markers: [],
+      schoolMarkers: [],
+      martMarkers: [],
+      bankMarkers: [],
+      cafeMarkers: [],
+      subwayMarkers: [],
+      hospitalMarkers: [],
       infowindow: null,
+      categoryFlag: [false, false, false, false, false, false],
+      categoryTitle: ["BK9", "MT1", "HP8", "CE7", "SC4", "SW8"],
+      categoryMarkers: [[], [], [], [], [], []],
+      categotyIcons: [BankIcon, MartIcon, HospitalIcon, CafeIcon, SchoolIcon, SubwayIcon],
     };
   },
   mounted() {
@@ -41,6 +83,67 @@ export default {
       //지도 객체를 등록합니다.
       //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
       this.map = new kakao.maps.Map(container, options);
+      kakao.maps.event.addListener(this.map, "idle", this.checkFlag);
+    },
+
+    checkFlag() {
+      this.categoryFlag.forEach((item, index) => {
+        if (item) {
+          this.searchPlaces(index);
+        }
+      });
+    },
+
+    searchPlaces(index) {
+      // 지도 이벤트 추가
+      let ps = new kakao.maps.services.Places(this.map);
+
+      //test
+      ps.categorySearch(this.categoryTitle[index], this.placeSearchCB, { useMapBounds: true });
+    },
+    placeSearchCB(data, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        // console.log("place success!", data);
+        this.displayPlaces(data);
+      } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+        // console.log("zero result !", status);
+      } else if (status === kakao.maps.services.Status.ERROR) {
+        // console.log("error", status);
+      }
+    },
+    displayPlaces(places) {
+      let idx;
+      this.categoryTitle.forEach((item, index) => {
+        if (item === places[0].category_group_code) {
+          idx = index;
+        }
+      });
+      for (let i = 0; i < places.length; i++) {
+        const imageSize = new kakao.maps.Size(32, 36);
+        let marker = new kakao.maps.Marker({
+          position: new kakao.maps.LatLng(places[i].y, places[i].x),
+          title: places[i].place_name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          image: new kakao.maps.MarkerImage(this.categotyIcons[idx], imageSize),
+        });
+        marker.setMap(this.map);
+        this.categoryMarkers[idx].push(marker);
+      }
+
+      // console.log(this.schoolMarkers);
+    },
+    changeFlag(index) {
+      this.categoryFlag[index] = !this.categoryFlag[index];
+      if (!this.categoryFlag[index]) {
+        this.removeMarkers(index);
+      } else {
+        this.searchPlaces(index);
+      }
+    },
+    removeMarkers(index) {
+      for (let i = 0; i < this.categoryMarkers[index].length; i++) {
+        this.categoryMarkers[index][i].setMap(null);
+      }
+      this.categoryMarkers[index] = [];
     },
   },
   computed: {
@@ -81,7 +184,6 @@ export default {
       }
     },
     house() {
-      console.log(12345);
       const bounds = new kakao.maps.LatLng(this.house.lat, this.house.lng);
       this.map.setCenter(bounds);
     },

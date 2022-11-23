@@ -3,6 +3,7 @@
     <div style="padding: 20px; text-align: center; width: 100%; height: 100px;">
       <h3 class="title">News</h3>
     </div>
+    <hr style="border: 0.5px solid rgb(225, 225, 225);" />
     <md-table md-card>
       <md-table-row v-for="info in infos" :key="info.link" :info="info">
         <a :href="info.link" target="_blank" style="color: black;"

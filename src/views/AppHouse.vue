@@ -11,7 +11,7 @@
       <kakao-map></kakao-map>
     </div>
     <md-card
-      style="position: absolute; top: 150px; left: 20px; width: 400px; height: 110px; opacity: 0.9; padding: 15px;"
+      style="position: absolute; top: 60px; left: 20px; width: 400px; height: 110px; opacity: 0.9; padding: 15px;"
     >
       <div class="flex-column" style="height: 30px;">
         <md-radio v-model="radio" :value="1">동검색</md-radio>
@@ -55,7 +55,7 @@
       </md-field> -->
     </md-card>
     <md-card
-      style="position: absolute; top: 280px; left: 20px; width: 400px; height: 500px; opacity: 1; padding: 15px; overflow: scroll;"
+      style="position: absolute; top: 190px; left: 20px; width: 400px; height: 500px; opacity: 1; padding: 15px; overflow: scroll;"
       v-if="cardView"
     >
       <div v-if="detailView">

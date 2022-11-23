@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <h1>{{ notice.notice_title }}</h1>
-    <small>{{ notice.notice_register_date }}</small>
+    <small style="text-align: right;">{{ notice.notice_register_date }}</small>
     <h4>
-      {{ notice.notice_content }}
+      <label v-html="notice.notice_content"></label>
     </h4>
 
     <md-button :to="{ name: 'noticelist' }">목록</md-button>
