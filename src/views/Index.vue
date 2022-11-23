@@ -27,46 +27,64 @@
         <nav-pills></nav-pills>
       </div> -->
 
-      <md-card class="md-layout-item md-xlarge-size-15 md-large-size-20 md-medium-size-45  md-xsmall-size-100">
-        <img class="imag" src="@/assets/img/apartments.png" />
-        <h3>매물검색</h3>
-        <hr />
-        <h4>아파트 거래 내역이 궁금하신가요?</h4>
-      </md-card>
-      <md-card
-        class="md-layout-item md-xlarge-size-15 
-      md-large-size-20 md-medium-size-45  md-xsmall-size-100"
-        ><img class="imag" src="@/assets/img/notice.png" />
-        <h3>공지사항</h3>
-        <hr />
-        <h4>무슨 일이 있는지 확인해보세요!</h4></md-card
-      >
-      <md-card
-        class="md-layout-item md-xlarge-size-15 
-      md-large-size-20 md-medium-size-45  md-xsmall-size-100"
-        ><img class="imag" src="@/assets/img/favorite.png" />
-        <h3>관심 아파트</h3>
-        <hr />
-        <h4>당신의 관심 아파트는 어디인가요?</h4></md-card
-      >
-      <md-card class="md-layout-item md-xlarge-size-15 md-large-size-20 md-medium-size-45  md-xsmall-size-100"
-        ><img class="imag" src="@/assets/img/mypage.png" />
-        <h3>내 정보</h3>
-        <hr />
-        <h4>당신의 정보를 확인 해보세요!</h4></md-card
-      >
+      <router-link :to="{name: 'house'}">
+        <md-card class="md-layout-item md-xlarge-size-15 md-large-size-20 md-medium-size-45  md-xsmall-size-100">
+          <img class="imag" src="@/assets/img/apartments.png" />
+          <h3>매물검색</h3>
+          <hr />
+          <h4>아파트 거래 내역이 궁금하신가요?</h4>
+        </md-card>
+      </router-link>
+
+      <router-link :to="{name: 'notice'}">
+        <md-card
+          class="md-layout-item md-xlarge-size-15 
+        md-large-size-20 md-medium-size-45  md-xsmall-size-100"
+          ><img class="imag" src="@/assets/img/notice.png" />
+          <h3>공지사항</h3>
+          <hr />
+          <h4>무슨 일이 있는지 확인해보세요!</h4></md-card
+        >
+      </router-link>
+
+      <router-link :to="{name: 'house'}" @click.native="checkUserAddr">
+        <md-card
+          class="md-layout-item md-xlarge-size-15 
+        md-large-size-20 md-medium-size-45  md-xsmall-size-100"
+          ><img class="imag" src="@/assets/img/favorite.png" />
+          <h3>관심 아파트</h3>
+          <hr />
+          <h4>당신의 관심 아파트는 어디인가요?</h4></md-card
+        >
+      </router-link>
+
+      <router-link :to="{name: 'mypage'}" @click.native="checkUserAddr">
+        <md-card class="md-layout-item md-xlarge-size-15 md-large-size-20 md-medium-size-45  md-xsmall-size-100"
+          ><img class="imag" src="@/assets/img/mypage.png"/>
+          <h3>내 정보</h3>
+          <hr />
+          <h4>당신의 정보를 확인 해보세요!</h4></md-card
+        >
+      </router-link>
+
+      <router-link :to="{name: 'news'}">
       <md-card class="md-layout-item md-xlarge-size-15 md-large-size-20 md-medium-size-45 md-xsmall-size-100"
         ><img class="imag" src="@/assets/img/news.png" />
         <h3>뉴스</h3>
         <hr />
         <h4>들어보세요. 무언가 심상치 않은 일이 벌어지고 있습니다.</h4></md-card
       >
+      </router-link>
+
+      <router-link :to="{name: 'qa'}" @click.native="checkUserAddr">
       <md-card class="md-layout-item md-xlarge-size-15 md-large-size-20 md-medium-size-45 md-xsmall-size-100"
         ><img class="imag" src="@/assets/img/ask.png" />
         <h3>Q & A</h3>
         <hr />
         <h4>저희가 도와드릴게요.</h4></md-card
       >
+      </router-link>
+
     </div>
     <div>
       <div></div>
@@ -77,7 +95,10 @@
 <script>
 import VueInputUi from "vue-input-ui";
 import "vue-input-ui/dist/vue-input-ui.css";
+import {mapActions, mapState} from "vuex";
+import swal from "sweetalert";
 
+const userStore = "userStore";
 export default {
   components: {
     // NavPills,
@@ -119,6 +140,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(userStore, ["userConfirm", "getUserInfo", "kakaoLogin"]),
     leafActive() {
       if (window.innerWidth < 768) {
         this.leafShow = false;
@@ -126,11 +148,28 @@ export default {
         this.leafShow = true;
       }
     },
-    go(search) {
-      this.$router.push({ name: "house", params: { search: search } });
+
+    checkUserAddr(e) {
+      if (this.userInfo.userinfoLevel == 3) {
+          // e.preventDefault();
+          swal({
+            title: "조회 실패!",
+            text: "로그인이 필요한 서비스입니다.",
+            icon: "warning",
+          }).then(() => {
+            this.$router.push({ name: "login" });
+          });
+        }
+      // if (!this.isLogin) {
+      //   e.preventDefault();
+
+      //   alert("로그인 후 이용가능합니다.");
+      //   this.$router.push({name: "index"});
+      // }
     },
   },
   computed: {
+    ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"]),
     headerStyle() {
       return {
         backgroundImage: `url(${this.image})`,
