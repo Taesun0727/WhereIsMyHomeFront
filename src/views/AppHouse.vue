@@ -11,34 +11,32 @@
       <kakao-map></kakao-map>
     </div>
     <md-card
-      style="position: absolute; top: 60px; left: 20px; width: 400px; height: 110px; opacity: 0.9; padding: 15px;"
+      style="position: absolute; top: 60px; left: 20px; width: 450px; height: 110px; opacity: 0.9; padding: 15px; z-index: 99;"
     >
       <div class="flex-column" style="height: 30px;">
         <md-radio v-model="radio" :value="1">동검색</md-radio>
         <md-radio v-model="radio" :value="2">아파트 검색</md-radio>
         <md-radio v-model="radio" :value="3">관심지역</md-radio>
       </div>
-      <div v-if="radio === 1">
-        <md-field class="block" style="width: 30%; margin-right: 15px; ">
-          <label for="sidos">지역</label>
-          <md-select v-model="sidoCode">
-            <md-option v-for="sido in sidos" v-bind:key="sido.value" :value="sido.value">{{ sido.text }}</md-option>
-          </md-select>
-        </md-field>
-        <md-field class="block" style="width: 30%; margin-right: 15px; ">
-          <label for="guguns">구/구군</label>
-          <md-select v-model="gugunCode" name="guguns" id="guguns">
-            <md-option v-for="gugun in guguns" v-bind:key="gugun.value" :value="gugun.value">{{
-              gugun.text
-            }}</md-option>
-          </md-select>
-        </md-field>
-        <md-field class="block" style="width: 30%; ">
-          <label for="guguns">법정동</label>
-          <md-select v-model="dongCode" name="dongs" id="dongs">
-            <md-option v-for="dong in dongs" v-bind:key="dong.value" :value="dong.value">{{ dong.text }}</md-option>
-          </md-select>
-        </md-field>
+      <div v-if="radio === 1" style="margin-top: 15px;">
+        <vSelect
+          v-model="sidoCode"
+          :options="sidos"
+          style="width: 40%; display: inline-block; font-size: 13px;"
+          placeholder="선택하세요"
+        ></vSelect>
+        <vSelect
+          v-model="gugunCode"
+          :options="guguns"
+          style="width: 30%; display: inline-block; font-size: 13px;"
+          placeholder="구/군"
+        ></vSelect>
+        <vSelect
+          v-model="dongCode"
+          :options="dongs"
+          style="width: 27%; display: inline-block; font-size: 13px;"
+          placeholder="법정동"
+        ></vSelect>
       </div>
       <div v-else-if="radio === 2">
         <md-field>
@@ -91,7 +89,7 @@
           <md-button class="md-theme-default" style="text-align: center;" @click="prev">목록</md-button>
         </div>
       </div>
-      <house-list v-else></house-list>
+      <house-list v-else style="width: 100%;"></house-list>
     </md-card>
   </div>
 </template>
@@ -107,6 +105,8 @@ import KakaoMap from "../components/kakaoMap.vue";
 import RoadView from "../components/roadview.vue";
 import DealTable from "../components/dealTable.vue";
 import HouseList from "../components/house/HouseList";
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 import swal from "sweetalert";
 
 export default {
@@ -133,21 +133,22 @@ export default {
     RoadView,
     DealTable,
     HouseList,
+    vSelect,
   },
   watch: {
     sidoCode: function() {
       this.CLEAR_GUGUN_LIST();
       this.CLEAR_DONG_LIST();
       this.gugunCode = null;
-      if (this.sidoCode) this.getGugun(this.sidoCode);
+      if (this.sidoCode) this.getGugun(this.sidoCode.id);
     },
     gugunCode: function() {
       this.CLEAR_DONG_LIST();
       this.dongCode = null;
-      if (this.gugunCode) this.getDong(this.gugunCode);
+      if (this.gugunCode) this.getDong(this.gugunCode.id);
     },
     dongCode: function() {
-      if (this.dongCode) this.getHouses(this.dongCode);
+      if (this.dongCode) this.getHouses(this.dongCode.id);
     },
     radio: function() {
       this.INIT_VIEW();
@@ -229,6 +230,11 @@ export default {
     this.CLEAR_APT_LIST();
     this.CLEAR_DONG_LIST();
     this.getSido();
+    if (this.$route.params.search) {
+      this.radio = 2;
+      this.aptName = this.$route.params.search;
+      this.searchAptName();
+    }
   },
 };
 </script>

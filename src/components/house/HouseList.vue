@@ -1,6 +1,6 @@
 <template>
   <div>
-    <datatable title="아파트" :columns="col" :rows="houses" :perPage="[5]" v-on:row-click="rowClick"> </datatable>
+    <datatable title="아파트" :columns="col" :rows="houses" :perPage="[5]" v-on:row-click="rowClick"></datatable>
   </div>
 </template>
 
@@ -27,6 +27,12 @@ export default {
           numeric: false,
           html: false,
         },
+        {
+          label: "최근가격",
+          field: "recentPrice",
+          numeric: false,
+          html: false,
+        },
       ],
     };
   },
@@ -47,4 +53,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+table {
+  width: 100%;
+}
+</style>

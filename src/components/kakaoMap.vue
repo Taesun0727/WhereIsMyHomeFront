@@ -52,7 +52,6 @@ export default {
       cafeMarkers: [],
       subwayMarkers: [],
       hospitalMarkers: [],
-      infowindow: null,
       categoryFlag: [false, false, false, false, false, false],
       categoryTitle: ["BK9", "MT1", "HP8", "CE7", "SC4", "SW8"],
       categoryMarkers: [[], [], [], [], [], []],
@@ -158,17 +157,12 @@ export default {
 
       if (this.houses.length > 0) {
         this.houses.forEach((element) => {
-          const infowindow = new kakao.maps.InfoWindow({
-            removable: true,
-            content: `<div style="padding: 5px;">${element.aptName}</div>`,
-          });
           const marker = new kakao.maps.Marker({
             title: element.aptName,
             map: this.map,
             position: new kakao.maps.LatLng(element.lat, element.lng),
           });
           kakao.maps.event.addListener(marker, "click", () => {
-            infowindow.open(this.map, marker);
             let data = {
               aptCode: element.aptCode,
               userinfo_num: this.userInfo.userinfo_num,

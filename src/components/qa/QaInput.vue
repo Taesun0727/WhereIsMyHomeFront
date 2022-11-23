@@ -38,7 +38,13 @@ export default {
     writeQna() {
       console.log(123);
       this.WriteQna(this.qna);
-      this.moveList();
+      swal({
+        title: "질문이 작성되었습니다!",
+        icon: "success",
+        button: "확인",
+      }).then(() => {
+        this.moveList();
+      });
     },
     moveList() {
       this.$router.push({ name: "qalist" });

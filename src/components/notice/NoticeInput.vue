@@ -72,6 +72,7 @@ export default {
     if (this.type === "modify") {
       this.ReadNotice(this.$route.params.noticeNum);
       this.inputNotice = this.notice;
+      console.log(this.inputNotice);
     }
     this.inputNotice.userinfo_num = this.userInfo.userinfo_num;
   },

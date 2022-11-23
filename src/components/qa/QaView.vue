@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" style="transform: translate3d(0, -20%, 0);">
     <md-card>
       <h1 class="title" style="display: inline-block;">Q.</h1>
       <h2 style="display: inline-block;">{{ qna.qa_title }}</h2>
@@ -21,7 +21,9 @@
         <h3 v-if="userInfo.userinfo_level == 2">답변 준비중입니다.</h3>
         <div v-else>
           <vue-editor v-model="inputQna.qa_content" />
-          <md-button class="md-success" style="float: right;" @click="write()">등록</md-button>
+        </div>
+        <div style="text-align: center;">
+          <md-button class="md-success" @click="write()">등록</md-button>
         </div>
       </div>
     </md-card>
@@ -53,8 +55,13 @@ export default {
     ...mapActions(qnaStore, ["ReadQna", "GetAnswer", "WriteAnswer"]),
     write() {
       this.WriteAnswer(this.inputQna);
-      alert("작성완료");
-      this.moveList();
+      swal({
+        title: "답변이 작성되었습니다!",
+        icon: "success",
+        button: "확인",
+      }).then(() => {
+        this.moveList();
+      });
     },
     moveList() {
       this.$router.push({ name: "qalist" });
