@@ -5,8 +5,14 @@
         <div class="md-layout-item">
           <div class="image-wrapper">
             <div class="brand">
-              <h1>Vue Material Kit</h1>
-              <h3>A Badass Vue.js UI Kit made with Material Design.</h3>
+              <h2 class="title" style="font-size: 55px; color: black;">어떤 집을 찾고 계신가요?</h2>
+
+              <VueInputUi
+                v-model="search"
+                label="원하시는 아파트명을 입력해주세요"
+                style="width: 80%; display: inline-block;"
+              ></VueInputUi>
+              <md-button style="margin-top: 0px;"><i class="material-icons">search</i></md-button>
             </div>
           </div>
         </div>
@@ -24,10 +30,13 @@
 
 <script>
 import NavPills from "./components/NavPillsSection";
+import VueInputUi from "vue-input-ui";
+import "vue-input-ui/dist/vue-input-ui.css";
 
 export default {
   components: {
     NavPills,
+    VueInputUi,
   },
   name: "index",
   bodyClass: "index-page",
@@ -55,6 +64,13 @@ export default {
       email: null,
       password: null,
       leafShow: false,
+      search: "",
+      buttonSettings: {
+        label: "Save",
+        color: "success",
+        position: "right",
+        size: "default",
+      },
     };
   },
   methods: {

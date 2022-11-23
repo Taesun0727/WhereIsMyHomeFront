@@ -16,7 +16,7 @@
                 <i class="fab fa-google-plus-g"></i>
               </md-button>
               <md-button slot="buttons" class="md-just-icon md-simple md-white" @click="kakaologin">
-                <img src="@/assets/img/btnG_icon_square.png">
+                <img src="@/assets/img/btnG_icon_square.png" />
               </md-button>
               <p slot="description" class="description">Or Be Classical</p>
               <!-- <md-field class="md-form-group" slot="inputs">
@@ -51,6 +51,7 @@
 <script>
 import { LoginCard } from "@/components";
 import { mapState, mapActions } from "vuex";
+import axios from "axios";
 
 const userStore = "userStore";
 const CLIENT_ID = "9903ba916813929e1cf77e63b54c47c2";
@@ -96,9 +97,9 @@ export default {
         this.$router.push({ name: "index" });
       }
     },
-    async kakaologin(){
+    async kakaologin() {
       window.location.replace(KAKAO_AUTH_URL);
-    }
+    },
   },
 };
 </script>
