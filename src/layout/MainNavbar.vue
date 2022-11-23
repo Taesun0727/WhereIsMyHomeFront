@@ -24,6 +24,12 @@
               <!-- Here you can add your items from the section-start of your toolbar -->
             </mobile-menu>
             <md-list>
+
+              <md-list-item :to="{ name: 'news' }">
+                <i class="material-icons">description</i>
+                <p>NEWS</p>
+              </md-list-item>
+
               <md-list-item :to="{ name: 'house' }">
                 <i class="material-icons">house</i>
                 <p>House</p>
