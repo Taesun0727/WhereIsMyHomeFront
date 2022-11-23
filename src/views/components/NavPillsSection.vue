@@ -16,11 +16,11 @@
             nav-pills-icons
             color-button="primary"
           > -->
-            <!-- here you can add your content for tab-content -->
-            <template>
-                <news></news>
-            </template>
-            
+          <!-- here you can add your content for tab-content -->
+          <template>
+            <news></news>
+          </template>
+
           <!-- </tabs> -->
         </div>
 
@@ -32,12 +32,11 @@
             nav-pills-icons
             color-button="primary"
           > -->
-            <template>
-              <main-notice></main-notice>
-            </template>
+          <template>
+            <main-notice></main-notice>
+          </template>
           <!-- </tabs>   -->
         </div>
-
 
         <!-- <div class="md-layout-item md-size-50 md-small-size-100">
           <tabs
@@ -48,9 +47,9 @@
             nav-pills-icons
             color-button="primary"
           > -->
-            <!-- here you can add your content for tab-content -->
-            <!-- <template slot="tab-pane-1"> -->
-              <!-- Collaboratively administrate empowered markets via plug-and-play
+        <!-- here you can add your content for tab-content -->
+        <!-- <template slot="tab-pane-1"> -->
+        <!-- Collaboratively administrate empowered markets via plug-and-play
               networks. Dynamically procrastinate B2C users after installed base
               benefits.
               <br /><br />
@@ -80,8 +79,12 @@ export default {
     // Tabs,
     News,
     MainNotice,
-  }
+  },
 };
 </script>
 
-<style lang="css"></style>
+<style lang="css" scoped>
+.wrapper {
+  width: 100%;
+}
+</style>
