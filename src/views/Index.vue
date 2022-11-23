@@ -12,7 +12,7 @@
                 label="원하시는 아파트명을 입력해주세요"
                 style="width: 80%; display: inline-block;"
               ></VueInputUi>
-              <md-button style="margin-top: 0px;"><i class="material-icons">search</i></md-button>
+              <md-button style="margin-top: 0px;" @click="go(search)"><i class="material-icons">search</i></md-button>
             </div>
           </div>
         </div>
@@ -93,7 +93,6 @@
 </template>
 
 <script>
-import NavPills from "./components/NavPillsSection";
 import VueInputUi from "vue-input-ui";
 import "vue-input-ui/dist/vue-input-ui.css";
 import {mapActions, mapState} from "vuex";

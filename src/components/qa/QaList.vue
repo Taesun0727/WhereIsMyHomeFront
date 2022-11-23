@@ -1,5 +1,5 @@
 <template>
-  <div style="transform: translate3d(0, -50%, 0);">
+  <div style="transform: translate3d(0, -20%, 0);">
     <div style="text-align: right;">
       <md-button
         class="md-primary"

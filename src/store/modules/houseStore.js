@@ -3,9 +3,9 @@ import store from "..";
 const houseStore = {
   namespaced: true,
   state: {
-    sidos: [{ value: null, text: "선택하세요" }],
-    guguns: [{ value: null, text: "선택하세요" }],
-    dongs: [{ value: null, text: "선택하세요" }],
+    sidos: [],
+    guguns: [],
+    dongs: [],
     houses: [],
     house: null,
     deals: [],
@@ -17,13 +17,13 @@ const houseStore = {
   },
   mutations: {
     CLEAR_SIDO_LIST(state) {
-      state.sidos = [{ value: null, text: "선택하세요" }];
+      state.sidos = [];
     },
     CLEAR_GUGUN_LIST(state) {
-      state.guguns = [{ value: null, text: "선택하세요" }];
+      state.guguns = [];
     },
     CLEAR_DONG_LIST(state) {
-      state.dongs = [{ value: null, text: "선택하세요" }];
+      state.dongs = [];
     },
     CLEAR_APT_LIST(state) {
       state.houses = [];
@@ -31,21 +31,22 @@ const houseStore = {
     },
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
-        state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
+        state.sidos.push({ id: sido.sidoCode, label: sido.sidoName });
       });
     },
     SET_GUGUN_LIST(state, guguns) {
       guguns.forEach((gugun) => {
-        state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
+        state.guguns.push({ id: gugun.gugunCode, label: gugun.gugunName });
       });
     },
     SET_DONG_LIST(state, dongs) {
       dongs.forEach((dong) => {
-        state.dongs.push({ value: dong.dongCode, text: dong.dongName });
+        state.dongs.push({ id: dong.dongCode, label: dong.dongName });
       });
     },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
+      console.log(houses)
       state.cardView = true;
       console.log(state.houses)
     },
