@@ -4,7 +4,7 @@
       <div class="container">
         <div class="md-layout">
           <div class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto">
-            <login-card header-color="green">
+            <login-card header-color="green" style="height: 360px">
               <h4 slot="title" class="card-title">Login</h4>
               <!-- <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
                 <i class="fab fa-facebook-square"></i>
@@ -15,12 +15,12 @@
               <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
                 <i class="fab fa-google-plus-g"></i>
               </md-button> -->
-              <p slot="description" class="description">
-                <md-button slot="buttons" class="md-just-icon md-simple md-white" style="width:80%;" @click="_kakaologin">
-                  <img src="@/assets/img/kakao_login.png">
+              <!-- <p slot="description" class="description">
+                <md-button class="md-just-icon md-simple md-white" style="width:80%;" @click="_kakaologin">
+                  <img src="@/assets/img/kakao_login.png" />
                 </md-button>
-              </p>
-            
+              </p> -->
+
               <!-- <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
                 <label>First Name...</label>
@@ -42,7 +42,11 @@
               <md-button href="/Join" slot="footer" class="md-simple md-success md-lg">
                 Sign Up
               </md-button>
-              
+              <div style="text-align: center;" slot="last">
+                <md-button class="md-just-icon md-simple md-white" style="width:80%;" @click="_kakaologin">
+                  <img src="@/assets/img/kakao_login.png" />
+                </md-button>
+              </div>
             </login-card>
           </div>
         </div>
@@ -50,7 +54,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import { LoginCard } from "@/components";
@@ -67,7 +70,7 @@ export default {
     LoginCard,
   },
   //jinsu 수정
-  props:{
+  props: {
     image: {
       type: String,
       default: require("@/assets/img/main.jpg"),
@@ -110,13 +113,12 @@ export default {
           this.kakaoLogin(authObj["access_token"]).then(() => {
             console.log(sessionStorage.getItem("access-token"));
             this.getUserInfo(sessionStorage.getItem("access-token"));
-            
+
             this.$router.push({ name: "index" });
           });
         },
       });
     },
-    
   },
 };
 </script>
