@@ -161,11 +161,11 @@ const userStore = {
       await Delete(userinfo,
         ({data}) => {
           if(data === "success"){
+            commit("SET_USER_INFO", {userinfo_level : 3});
             commit("SET_IS_LOGIN", false);
-            commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
+            console.log("삭제 성공");
           } else {
-            
             console.log("탈퇴가 제대로 이루어지지 않음!!!");
           }
         },
