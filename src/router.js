@@ -3,7 +3,6 @@ import Router from "vue-router";
 import Index from "@/views/Index.vue";
 import Landing from "@/views/Landing.vue";
 import Login from "@/views/Login.vue";
-import kakao from "@/views/KakaoLogin.vue";
 import Profile from "@/views/Profile.vue";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
@@ -29,6 +28,7 @@ import QaView from "@/components/qa/QaView.vue"
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -49,21 +49,21 @@ export default new Router({
       }
     },
     {
-      path: "/kakao",
-      name: "kakao",
-      components: { default: kakao, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
-    },
-    {
       path: "/login",
       name: "login",
       components: { default: Login, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 }
       }
+    },
+    {
+      path: "/kakaologin",
+      name: "kakaologin",
+      component : () => import("@/views/KakaoLogin.vue")
+      // components: { default: Kakaologin, header: MainNavbar, footer: MainFooter },
+      // props: {
+      //   header: { colorOnScroll: 400 }
+      // }
     },
     {
       path: "/join",

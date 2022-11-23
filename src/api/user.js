@@ -6,6 +6,10 @@ async function login(user, success, fail) {
   await api.post(`/user/login`, JSON.stringify(user)).then(success).catch(fail);
 }
 
+async function kakaoLogin(token, success, fail) {
+  await api.get(`/kakaologin?code=${token}`).then(success).catch(fail);
+}
+
 async function findById(userid, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
   await api.get(`/user/info/${userid}`).then(success).catch(fail);
@@ -31,4 +35,5 @@ async function Modify(user, success, fail){
 async function PwModify(user, success, fail){
   await api.put(`/user/pwupdate`, JSON.stringify(user)).then(success).catch(fail);
 }
-export { login, findById, tokenRegeneration, logout, Delete, Modify, PwModify};
+
+export { login, kakaoLogin, findById, tokenRegeneration, logout, Delete, Modify, PwModify};

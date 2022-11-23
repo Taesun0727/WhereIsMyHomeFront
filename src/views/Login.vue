@@ -15,7 +15,7 @@
               <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
                 <i class="fab fa-google-plus-g"></i>
               </md-button>
-              <md-button slot="buttons" class="md-just-icon md-simple md-white" @click="kakaologin">
+              <md-button slot="buttons" class="md-just-icon md-simple md-white" @click="_kakaologin">
                 <img src="@/assets/img/btnG_icon_square.png">
               </md-button>
               <p slot="description" class="description">Or Be Classical</p>
@@ -37,7 +37,7 @@
               <md-button href="/" slot="footer" class="md-simple md-success md-lg" @click.prevent="confirm">
                 Login
               </md-button>
-              <md-button href="#/Join" slot="footer" class="md-simple md-success md-lg">
+              <md-button href="/Join" slot="footer" class="md-simple md-success md-lg">
                 Sign Up
               </md-button>
             </login-card>
@@ -48,14 +48,15 @@
   </div>
 </template>
 
+
 <script>
 import { LoginCard } from "@/components";
 import { mapState, mapActions } from "vuex";
 
 const userStore = "userStore";
-const CLIENT_ID = "9903ba916813929e1cf77e63b54c47c2";
-const REDIRECT_URI = "http://localhost/kakaologin";
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+// const CLIENT_ID = "9903ba916813929e1cf77e63b54c47c2";
+// const REDIRECT_URI = "http://localhost:8080/kakaologin";
+// const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 export default {
   components: {
@@ -85,7 +86,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
+    ...mapActions(userStore, ["userConfirm", "getUserInfo", "kakaoLogin"]),
     async confirm() {
       await this.userConfirm(this.user);
       let token = sessionStorage.getItem("access-token");
@@ -96,9 +97,21 @@ export default {
         this.$router.push({ name: "index" });
       }
     },
-    async kakaologin(){
-      window.location.replace(KAKAO_AUTH_URL);
-    }
+    _kakaologin() {
+      window.Kakao.Auth.login({
+        scope: "profile_nickname, account_email",
+        success: (authObj) => {
+          console.log(authObj["access_token"]);
+          this.kakaoLogin(authObj["access_token"]).then(() => {
+            console.log(sessionStorage.getItem("access-token"));
+            this.getUserInfo(sessionStorage.getItem("access-token"));
+            
+            this.$router.push({ name: "index" });
+          });
+        },
+      });
+    },
+    
   },
 };
 </script>
