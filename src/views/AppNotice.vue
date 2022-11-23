@@ -7,7 +7,7 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-75 mx-auto">
               <title-component :title="title"></title-component>
-              <router-view style="transform: translate3d(0, -20%, 0);"></router-view>
+              <router-view></router-view>
             </div>
           </div>
         </div>

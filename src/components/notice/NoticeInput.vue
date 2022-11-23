@@ -17,7 +17,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-
+import swal from "sweetalert";
 import { mapActions, mapState } from "vuex";
 
 const userStore = "userStore";
@@ -42,18 +42,23 @@ export default {
     ...mapActions(noticeStore, ["WriteNotice", "ReadNotice", "ModifyNotice"]),
     registerNotice() {
       this.WriteNotice(this.inputNotice);
-      // if (msg === "success") {
-      //   alert("작성되었습니다.");
-      //   this.moveList();
-      // } else {
-      //   alert("작성 처리중 문제가 발생했습니다");
-      // }
-      alert("작성되었습니다.");
-      this.moveList();
+      swal({
+        title: "작성되었습니다!",
+        icon: "success",
+        button: "확인",
+      }).then(() => {
+        this.moveList();
+      });
     },
     modifyNotice() {
       this.ModifyNotice(this.inputNotice);
-      this.moveList();
+      swal({
+        title: "수정되었습니다!",
+        icon: "success",
+        button: "확인",
+      }).then(() => {
+        this.moveList();
+      });
     },
     moveList() {
       this.$router.push({ name: "noticelist" });

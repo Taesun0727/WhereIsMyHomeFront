@@ -46,7 +46,6 @@ const noticeStore = {
       await deleteNotice(
         noticeNum,
         ({ data }) => {
-          alert("삭제되었습니다");
         }
       )
     },
