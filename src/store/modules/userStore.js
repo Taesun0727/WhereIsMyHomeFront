@@ -1,6 +1,6 @@
 import router from "@/router.js";
 import jwtDecode from "jwt-decode";
-import { login, findById, tokenRegeneration, logout, Delete, Modify, PwModify} from "@/api/user";
+import { login, kakaoLogin, findById, tokenRegeneration, logout, Delete, Modify, PwModify} from "@/api/user";
 
 const userStore = {
   namespaced: true,
@@ -62,6 +62,22 @@ const userStore = {
         }
       );
     },
+    async kakaoLogin({ commit }, token) {
+      await kakaoLogin(token, ({ data }) => {
+        let accessToken = data["access-token"];
+        let refreshToken = data["refresh-token"];
+        console.log(data);
+        commit("SET_IS_LOGIN", true);
+        commit("SET_IS_LOGIN_ERROR", false);
+        commit("SET_IS_VALID_TOKEN", true);
+        // console.log("레벨 설정 : " + data.level);
+        sessionStorage.setItem("access-token", accessToken);
+        sessionStorage.setItem("refresh-token", refreshToken);
+        return true;
+      });
+    },
+
+
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
       // console.log("2. getUserInfo() decodeToken :: ", decodeToken);
@@ -69,6 +85,7 @@ const userStore = {
         decodeToken.userinfo,
         ({ data }) => {
           if (data.message === "success") {
+            console.log(data.userInfo);
             commit("SET_USER_INFO", data.userInfo);
             // console.log("3. getUserInfo data >> ", data);
           } else {

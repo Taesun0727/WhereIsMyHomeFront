@@ -31,7 +31,7 @@
                                 <label>Password...</label>
                                 <md-input v-model="user.userinfo_password" type="password"></md-input>
                             </md-field>
-                            <md-button href="#/Login" slot="footer" class="md-simple md-success md-lg" @click="join">
+                            <md-button href="/Login" slot="footer" class="md-simple md-success md-lg" @click="join">
                                 회원가입
                             </md-button>
                         </login-card>
