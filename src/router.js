@@ -9,7 +9,7 @@ import MainFooter from "@/layout/MainFooter.vue";
 import Join from "@/views/Join.vue";
 import MyPage from "@/views/MyPage.vue";
 
-import News from "@/components/News.vue";
+import News from "@/views/AppNews.vue";
 import House from "@/views/AppHouse.vue";
 
 import Notice from "@/views/AppNotice.vue";

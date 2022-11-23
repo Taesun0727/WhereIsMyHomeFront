@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .page-header {
   height: 380px;
 }
