@@ -7,12 +7,17 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-100 mx-auto">
               <title-component :title="title"></title-component>
-              <div style="transform: translate3d(0, -20%, 0);">
-                <a :href="info.link" v-for="info in infos" :key="info.link" :info="info">
-                  <md-card
-                    class="md-layout-item md-xlarge-size-20 
+              <div class="md-layout md-gutter" style="transform: translate3d(0, -20%, 0);">
+                <a
+                  :href="info.link"
+                  target="_blank"
+                  v-for="info in infos"
+                  :key="info.link"
+                  :info="info"
+                  class="md-layout-item md-xlarge-size-20 
         md-large-size-20 md-medium-size-45  md-xsmall-size-100"
-                    style="overflow: hidden;"
+                >
+                  <md-card style="overflow: hidden; height: 300px; margin: 15px;" class="md-size-100"
                     ><img class="imag" src="@/assets/img/news.png" />
                     <h4><label v-html="info.title"></label></h4>
                     <!-- <hr />
@@ -73,14 +78,5 @@ export default {
 <style>
 .page-header {
   height: 380px;
-}
-.md-card {
-  text-align: center;
-  margin: 30px 10px;
-  height: 300px;
-  overflow: hidden;
-}
-.md-card:hover {
-  transform: translate3d(0, -5%, 0);
 }
 </style>

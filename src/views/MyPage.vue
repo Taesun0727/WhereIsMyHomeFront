@@ -1,32 +1,31 @@
 <template>
-    <div class="wrapper">
+  <div class="wrapper">
     <div class="section page-header header-filter" :style="headerStyle">
-      <div class="container">
-        <div class="md-layout">
+      <div class="container" style="height: 100vh;">
+        <div class="md-layout" style="transform: translate3d(0, 40%, 0);">
           <div class="mx-auto">
             <login-card header-color="green" v-if="userInfo" style="width:600px;">
               <h4 slot="title" class="card-title">My Page</h4>
               <p slot="description" class="description">User</p>
 
               <span slot="description" class="nickname">
-                  <div style="display:flex; align-items:center;">
-                    <!-- <h5>Nickname :</h5> -->
-                    <h5 v-if="!isModify">Nickname : {{userInfo.userinfo_nick}}</h5>
-                    <md-field v-else>
-                      <label>nickname</label>
-                      <md-input style="width:70%;" v-model="userInfo.userinfo_nick"></md-input>
-                      <md-button style="d-inline" @click="Modify">수정하기</md-button>
-                    </md-field>
-                  </div>
+                <div style="display:flex; align-items:center;">
+                  <!-- <h5>Nickname :</h5> -->
+                  <h5 v-if="!isModify">Nickname : {{ userInfo.userinfo_nick }}</h5>
+                  <md-field v-else>
+                    <label>nickname</label>
+                    <md-input style="width:70%;" v-model="userInfo.userinfo_nick"></md-input>
+                    <md-button style="d-inline" @click="Modify">수정하기</md-button>
+                  </md-field>
+                </div>
               </span>
 
               <span slot="description" class="id" v-if="!isPwModify">
                 <div style="display:flex; align-items:center;">
-                  <h4>ID : {{userInfo.userinfo_id}}</h4>
+                  <h4>ID : {{ userInfo.userinfo_id }}</h4>
                 </div>
               </span>
 
-              
               <span slot="description" class="id" v-else>
                 <div style="display:flex; align-items:center;">
                   <!-- <h5>PW : </h5> -->
@@ -64,7 +63,7 @@ const userStore = "userStore";
 
 export default {
   components: {
-      LoginCard,
+    LoginCard,
   },
   name: "MyPage",
   bodyClass: "login-page",
@@ -80,7 +79,7 @@ export default {
       },
     };
   },
-  props:{
+  props: {
     image: {
       type: String,
       default: require("@/assets/img/main.jpg"),
@@ -96,26 +95,24 @@ export default {
   },
   methods: {
     ...mapActions(userStore, ["userConfirm", "getUserInfo", "userDelete", "userModify", "userPwModify"]),
-    async Delete(){
+    async Delete() {
       await this.userDelete(this.userInfo.userinfo_num);
       // console.log(this.userInfo);
-      if(this.userInfo){
-        this.$router.push({name: "index"});
+      if (this.userInfo) {
+        this.$router.push({ name: "index" });
       }
     },
-    async Modify(){
+    async Modify() {
       console.log(this.userInfo);
       await this.userModify(this.userInfo);
       this.isModify = false;
     },
-    async PwModify(){
+    async PwModify() {
       await this.userPwModify(this.userInfo);
       this.isPwModify = false;
     },
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

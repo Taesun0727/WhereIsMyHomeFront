@@ -38,6 +38,7 @@ export default {
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`,
+        height: "380px",
       };
     },
   },

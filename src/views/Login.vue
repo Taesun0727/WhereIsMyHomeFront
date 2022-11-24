@@ -1,31 +1,11 @@
 <template>
   <div class="wrapper">
     <div class="section page-header header-filter" :style="headerStyle">
-      <div class="container">
-        <div class="md-layout">
+      <div class="container" style="height: 100vh;">
+        <div class="md-layout" style="transform: translate3d(0, 40%, 0);">
           <div class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto">
             <login-card header-color="green" style="height: 360px">
               <h4 slot="title" class="card-title">Login</h4>
-              <!-- <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
-                <i class="fab fa-facebook-square"></i>
-              </md-button>
-              <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
-                <i class="fab fa-twitter"></i>
-              </md-button>
-              <md-button slot="buttons" href="javascript:void(0)" class="md-just-icon md-simple md-white">
-                <i class="fab fa-google-plus-g"></i>
-              </md-button> -->
-              <!-- <p slot="description" class="description">
-                <md-button class="md-just-icon md-simple md-white" style="width:80%;" @click="_kakaologin">
-                  <img src="@/assets/img/kakao_login.png" />
-                </md-button>
-              </p> -->
-
-              <!-- <md-field class="md-form-group" slot="inputs">
-                <md-icon>face</md-icon>
-                <label>First Name...</label>
-                <md-input v-model="firstname"></md-input>
-              </md-field> -->
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>ID...</label>
