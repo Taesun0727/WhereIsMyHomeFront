@@ -21,15 +21,12 @@
         <h3 v-if="userInfo.userinfo_level == 2">답변 준비중입니다.</h3>
         <div v-else>
           <vue-editor v-model="inputQna.qa_content" />
-        </div>
-        <div style="text-align: center;">
-          <md-button class="md-success" @click="write()">등록</md-button>
+          <div style="text-align: center;">
+            <md-button class="md-success" @click="write()">등록</md-button>
+          </div>
         </div>
       </div>
     </md-card>
-    <diV style="text-align: center;">
-      <md-button :to="{ name: 'qalist' }" style="text-align: center;">목록</md-button>
-    </diV>
   </div>
 </template>
 
@@ -71,8 +68,8 @@ export default {
     ...mapState(userStore, ["userInfo"]),
     ...mapState(qnaStore, ["qna", "answer"]),
   },
-  created() {
-    this.ReadQna(this.$route.params.qnaNum);
+  async created() {
+    await this.ReadQna(this.$route.params.qnaNum);
     if (this.qna.qa_status == 1) {
       this.GetAnswer(this.qna.qa_num);
     }

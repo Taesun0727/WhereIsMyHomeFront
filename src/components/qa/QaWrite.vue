@@ -1,5 +1,5 @@
 <template>
-  <div style="transform: translate3d(0, -60%, 0);">
+  <div style="transform: translate3d(0, -30%, 0);">
     <qa-input type="register"></qa-input>
   </div>
 </template>

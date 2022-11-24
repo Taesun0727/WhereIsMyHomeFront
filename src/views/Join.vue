@@ -22,7 +22,7 @@
                 <label>Password...</label>
                 <md-input v-model="user.userinfo_password" type="password"></md-input>
               </md-field>
-              <md-button href="/Login" slot="footer" class="md-simple md-success md-lg" @click="join">
+              <md-button slot="footer" class="md-simple md-success md-lg" @click="join">
                 회원가입
               </md-button>
             </login-card>
@@ -35,7 +35,9 @@
 
 <script>
 import { LoginCard } from "@/components";
-import axios from "@/api/http";
+import { apiInstance } from "@/api/index.js";
+
+const api = apiInstance();
 
 export default {
   components: {
@@ -65,9 +67,9 @@ export default {
     },
   },
   methods: {
-    join() {
-      axios.post(`/user/join`, this.user).then(({ data }) => {
-        console.log(data);
+    async join() {
+      await api.post(`/user/join`, this.user).then(({ data }) => {
+        this.$router.push({ name: "login" });
       });
     },
   },

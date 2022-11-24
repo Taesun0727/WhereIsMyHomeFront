@@ -1,5 +1,5 @@
 <template>
-  <div style="transform: translate3d(0, -20%, 0);">
+  <div style="transform: translate3d(0, -15%, 0); height: 1000px;">
     <div style="text-align: right;">
       <md-button
         class="md-primary"
@@ -9,7 +9,6 @@
         >문의하기</md-button
       >
     </div>
-
     <ul>
       <li class="list" v-for="qna in qnas" :key="qna.qa_num" :qna="qna" @click="go(qna.qa_num)">
         <span class="badge badge-default" v-if="qna.qa_status == 0">답변준비중</span

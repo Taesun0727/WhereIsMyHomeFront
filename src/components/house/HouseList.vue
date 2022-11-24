@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="abc">
     <datatable title="아파트" :columns="col" :rows="houses" :perPage="[5]" v-on:row-click="rowClick"></datatable>
   </div>
 </template>
@@ -53,8 +53,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 table {
-  width: 100%;
+  width: 410px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="transform: translate3d(0, -30%, 0);">
+  <div class="container" style="transform: translate3d(0, -40%, 0);">
     <div v-if="userInfo.userinfo_level === 1" style="text-align: right;">
       <md-button class="md-info" :to="{ name: 'noticemodify', params: { noticeNum: notice.notice_num } }"
         >수정</md-button

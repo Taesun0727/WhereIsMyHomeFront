@@ -28,4 +28,4 @@ new Vue({
   render: h => h(App)
 }).$mount("#app");
 
-window.Kakao.init("1f3b1fef29a58d3928a1e245c9aca7fc");
+window.Kakao.init("8a8e4361ef4ba871d6d6f591269b5cba");

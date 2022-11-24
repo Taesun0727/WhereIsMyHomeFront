@@ -22,9 +22,7 @@ const userStore = {
   },
   mutations: {
     SET_IS_LOGIN: (state, isLogin) => {
-      console.log(isLogin)
       state.isLogin = isLogin;
-      console.log(state.isLogin)
     },
     SET_IS_LOGIN_ERROR: (state, isLoginError) => {
       state.isLoginError = isLoginError;
@@ -85,7 +83,6 @@ const userStore = {
         decodeToken.userinfo,
         ({ data }) => {
           if (data.message === "success") {
-            console.log(data.userInfo);
             commit("SET_USER_INFO", data.userInfo);
             // console.log("3. getUserInfo data >> ", data);
           } else {

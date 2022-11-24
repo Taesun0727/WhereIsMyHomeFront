@@ -38,7 +38,6 @@
 <script>
 import { LoginCard } from "@/components";
 import { mapState, mapActions } from "vuex";
-import axios from "axios";
 
 const userStore = "userStore";
 // const CLIENT_ID = "9903ba916813929e1cf77e63b54c47c2";

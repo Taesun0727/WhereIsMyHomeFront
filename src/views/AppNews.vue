@@ -35,7 +35,9 @@
 
 <script>
 import TitleComponent from "../components/TitleComponent.vue";
-import http from "@/api/http.js";
+import { apiInstance } from "@/api/index.js";
+
+const api = apiInstance();
 
 export default {
   name: "news",
@@ -70,7 +72,7 @@ export default {
     },
   },
   created() {
-    http.get(`/naver`).then(({ data }) => (this.infos = data.items));
+    api.get(`/naver`).then(({ data }) => (this.infos = data.items));
   },
 };
 </script>
