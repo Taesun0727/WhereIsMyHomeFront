@@ -48,8 +48,8 @@ export default {
     ...mapState(userStore, ["userInfo"]),
     ...mapState(noticeStore, ["notices"]),
   },
-  created() {
-    this.GetNotices();
+  async created() {
+    await this.GetNotices();
   },
 };
 </script>

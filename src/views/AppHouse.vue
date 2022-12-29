@@ -23,7 +23,7 @@
           v-model="sidoCode"
           :options="sidos"
           style="width: 40%; height: 30px; display: inline-block; font-size: 9px;"
-          placeholder="선택하세요"
+          placeholder="지역"
         ></vSelect>
         <vSelect
           v-model="gugunCode"

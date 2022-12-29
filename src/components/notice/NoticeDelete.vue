@@ -16,8 +16,8 @@ export default {
   methods: {
     ...mapActions(noticeStore, ["DeleteNotice"]),
   },
-  created() {
-    this.DeleteNotice(this.$route.params.noticeNum);
+  async created() {
+    await this.DeleteNotice(this.$route.params.noticeNum);
     this.$router.push({ name: "noticelist" });
   },
 };

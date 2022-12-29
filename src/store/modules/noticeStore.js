@@ -42,7 +42,7 @@ const noticeStore = {
         }
       )
     },
-    async DeleteNotice({}, noticeNum) {
+    async DeleteNotice({ }, noticeNum) {
       await deleteNotice(
         noticeNum,
         ({ data }) => {
